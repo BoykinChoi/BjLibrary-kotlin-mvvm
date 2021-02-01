@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_title_size_14">14dp</dimen>
+    <dimen name="common_title_size_18">18dp</dimen>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#00574B</color>
+
+    <color name="color_bg">#f2f4f5</color>
+    <color name="color_bg_white">#ffffff</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_line_gray">#F5F6F6</color>
+    <color name="color_line_gray_big">#f2f2f2</color>
+
+    <color name="color_text_black">#333333</color>
+    <color name="color_text_black2">#202633</color>
+    <color name="color_text_gray">#666666</color>
+    <color name="color_text_gray1">#ADADAD</color>
+    <color name="color_text_gray2">#999999</color>
+    <color name="color_text_gray3">#a6a6a6</color>
+    <color name="color_text_gray4">#e2e2e2</color>
+    <color name="color_text_gray5">#E5E5E5</color>
+    <color name="color_text_gray6">#F6F7F9</color>
+    <color name="color_text_gray8">#CFCFCF</color>
+    <color name="color_text_gray9">#F5F6F6</color>
+    <color name="color_shadow_gray">#EBEBEB</color>
+    <color name="color_shadow_gray2">#F1F0F5</color>
+
+    <color name="color_transparent">#01000000</color>
+    <color name="color_transparent3">#60000000</color>
+    <color name="color_transparent7">#90000000</color>
+    <color name="color_transparent8">#B8000000</color>
+
+    <color name="color_light_green2">#DBF9DB</color>
+    <color name="color_light_green3">#D2F2E5</color>
+    <color name="color_light_green4">#e3efee</color>
+    <color name="color_light_green5">#E7F8EF</color>
+    <color name="color_keyword_green">#88D3AA</color>
+    <color name="color_light_cyan">#F4FCFE</color>
+    <color name="color_orange">#FF855D</color>
+    <color name="color_orange2">#FF9000</color>
+    <color name="color_light_orange">#FFECD0</color>
+    <color name="color_green">#50BB4D</color>
+    <color name="color_main_green">#1CBD7B</color>
+    <color name="color_green_bg">#ECFFEC</color>
+    <color name="color_red">#E60012</color>
+    <color name="color_brown">#956735</color>
+    <color name="color_dark_brown">#663A1C</color>
+
+    <color name="color_green_gradient_start">#77D7B1</color>
+    <color name="color_green_gradient_end">#1CBD7B</color>
+
+    <color name="color_light_green_gradient_start">#D2F2E5</color>
+    <color name="color_light_green_gradient_end">#E3FDE3</color>
+
+    <color name="color_orange_gradient_start">#FFD28E</color>
+    <color name="color_orange_gradient_end">#FFA00F</color>
+
+    <color name="color_drak_blue_gradient_start">#3E2D53</color>
+    <color name="color_drak_gradient_end">#1D1429</color>
+
+    <color name="answer_right">#2DC229</color>
+    <color name="answer_wrong">#F60403</color>
+</resources>
