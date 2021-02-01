@@ -1,0 +1,102 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+
+def config = rootProject.ext.ver
+def library = rootProject.ext.library
+
+android {
+    compileSdkVersion config.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        //ARouter 必须配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    publishNonDefault true //默认不为发布版本
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
+
+    //添加Jetpack中架构组件的依赖，注意viewmodel要添加viewmodel-ktx的依赖
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    api library.androidX_appcompat
+    api library.recyclerview_x
+    api library.constraint_x
+
+    //RxJava2+Retrofit2 网络框架
+    api library.okio
+    api library.okhttp
+    api library.okhttp_logging
+    api library.retrofit2
+    api library.gson
+    api library.retrofit2_gson
+    api library.retrofit2_adapter
+    api library.rxjava2
+    api library.rxlifecycle2_components
+
+    //屏幕适配
+    api library.autosize
+
+    //常用工具库
+    api library.circleimageview
+    api library.roundedimageview
+    api library.BaseRecyclerViewAdapterHelper
+    api library.SmartRefreshLayout
+    api library.SmartRefreshHeader
+    api library.rxpermissions2
+    api library.logger
+    api library.glide
+    api library.glide_transformations
+    api library.BaseToolbar
+    api library.Immersionbar
+    api library.Immersionbar
+    //api library.StatusBarUtil
+    api library.stateview
+
+    //阿里路由
+    api library.ARouter
+    annotationProcessor library.ARouterCompiler
+    //内存泄漏检测
+    debugApi library.debugApi
+    //releaseApi library.releaseApi
+
+}
+repositories {
+    mavenCentral()
+}

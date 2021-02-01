@@ -1,0 +1,153 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def config = rootProject.ext.ver
+def library = rootProject.ext.library
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getDefault())
+}
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    defaultConfig {
+        applicationId "com.boykinchoi.read"
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true //添加多dex分包支持
+
+        //ARouter 必须配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "24b65fcb9c37bb5d85ba9118", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+        flavorDimensions "default"
+    }
+
+    // AS3.0 自定义APK安装包名
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "playtoread-v${variant.versionName}-${releaseTime()}-${variant.buildType.name}.apk"
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            resolutionStrategy.eachDependency { details ->
+                /*if (details.requested.group == 'androidx.core') {
+                   details.useVersion "1.0.1"
+               }
+                if (details.requested.group == 'androidx.lifecycle') {
+                    details.useVersion "2.0.0"
+                }*/
+                if (details.requested.group == 'androidx.versionedparcelable') {
+                    details.useVersion "1.0.0"
+                }
+                if (details.requested.group == 'androidx.recyclerview:recyclerview') {
+                    details.useVersion "1.1.0"
+                }
+                if (details.requested.group == 'androidx.fragment') {
+                    details.useVersion "1.0.0"
+                }
+                if (details.requested.group == 'androidx.appcompat') {
+                    details.useVersion "1.2.0"
+                }
+            }
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(rootProject.ext.keystorePath)
+            storePassword rootProject.ext.keystorePassword
+            keyAlias rootProject.ext.alias
+            keyPassword rootProject.ext.aliasPassword
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField('String', 'HOST_URL', '"http://47.113.108.191:8523/"')
+            buildConfigField('String', 'HOST_H5_URL', '"http://test-resource.digitspower.cn/yuedudashi/#"')
+            manifestPlaceholders = [
+                    UMENG_APPKEY: "5ec24b95dbc2ec078b5be93f",
+            ]
+            ndk {
+                // 设置支持的SO库架构
+                abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86_64', 'x86'
+            }
+            //配置debug包的签名,与发布签名一致，方便测试
+            //signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "HOST_URL", '"http://47.113.108.191:8523/"')
+            buildConfigField("String", "HOST_H5_URL", '"http://test-resource.digitspower.cn/yuedudashi/#"')
+            buildConfigField('String', 'APP_CHANNEL', '"1.5_dev"')
+            manifestPlaceholders = [
+                    UMENG_APPKEY: "5ec24b95dbc2ec078b5be93f",
+            ]
+            ndk {
+                abiFilters 'armeabi', 'armeabi-v7a'
+            }
+            //signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
+
+    //添加Jetpack中架构组件的依赖，注意viewmodel要添加viewmodel-ktx的依赖
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation project(':baselibrary')
+    debugImplementation project(':baselibrary')
+
+    implementation library.androidX_appcompat
+    implementation library.recyclerview_x
+    implementation library.constraint_x
+
+    implementation 'com.github.nukc.stateview:library:1.5.4'
+
+
+}
