@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.boykinchoi.baselibrary.R
+import com.boykinchoi.baselibrary.util.ToastUtil
 import com.github.nukc.stateview.StateView
-import com.trello.rxlifecycle2.components.RxFragment
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -19,81 +18,93 @@ import java.lang.reflect.ParameterizedType
  * Created by BoykinChoi
  * on 2020/12/25
  **/
-abstract class BaseFragment<V: BaseViewModel> : Fragment(){
-    var activity: AppCompatActivity? = null
+abstract class BaseFragment<V : BaseViewModel> : Fragment() {
     var viewModel: V? = null
     var stateView: StateView? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(layoutId, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initialize()
+        //viewModel = createViewModel()
+        //和Activity共用同一个ViewModel
+        viewModel = (activity as BaseActivity<*>).viewModel as V
         initStateView()
+        initialize()
         initData()
         observeLoadState()
+        //监听页面数据变化
+        observeData()
     }
 
     private fun initStateView() {
-        initStateViewRoot()
+        stateView = StateView.inject(stateRootView!!)
         stateView?.setEmptyResource(R.layout.layout_empty_data)
         stateView?.setLoadingResource(R.layout.layout_loading)
         stateView?.setRetryResource(R.layout.layout_load_retry)
         stateView?.setOnRetryClickListener { initData() }
     }
 
-    private fun initData() {
-        //开始请求数据
-        viewModel?.getBaseData()
-        //监听页面基础数据变化
-        observeBaseData()
-    }
-
     /**
      * 监听viewModel加载状态变化
      */
     protected fun observeLoadState() {
+        //监听stateView展示状态
         viewModel?.loadState?.observe(this, Observer {
             when (it) {
                 is LoadState.Success -> stateView?.showContent()
-                is LoadState.Fail -> stateView?.showRetry()
+                is LoadState.Fail -> {
+                    stateView?.showRetry()
+                    ToastUtil.l(it.msg)
+                }
                 is LoadState.Loading -> stateView?.showLoading()
             }
         })
+        //监听加载框显示/隐藏
+        viewModel?.showLoadingDialog?.observe(this, Observer {
+            if (it) showLoadingDialog() else dismissLoadingDialog()
+        })
     }
 
-    /**
-     * 根据泛型V 创建ViewModel实例 此处已重写，需要时可重写
-     *
-     * @return
-     */
     protected fun createViewModel(): V? {
-        if (this.javaClass.genericSuperclass is ParameterizedType
-                && (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments.isNotEmpty()
-        ) {
+        val genericSuperclass = this.javaClass.genericSuperclass
+        //kotlin 通过is判断类型后，若true,则后面会自动转为该类型
+        if (genericSuperclass is ParameterizedType
+                && (genericSuperclass).actualTypeArguments.isNotEmpty()) {
             //获取ViewModel的class
-            val viewModelClass =
-                    (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<V>
-            //生成ViewModel实例
-            return ViewModelProviders.of(this).get(viewModelClass)
+            val viewModelClass = (genericSuperclass).actualTypeArguments[0] as Class<V>
+            //生成ViewModel实例,ps ViewModelProviders already Deprecated
+            //return ViewModelProviders.of(this).get(viewModelClass)
+            return ViewModelProvider(this).get(viewModelClass)
         }
         return null
+    }
+
+
+    fun showLoadingDialog() {
+        (activity as BaseActivity<*>).showLoadingDialog()
+    }
+
+    fun dismissLoadingDialog() {
+        (activity as BaseActivity<*>).dismissLoadingDialog()
     }
 
     @get:LayoutRes
     abstract val layoutId: Int
 
+    abstract val stateRootView: View?
+
     abstract fun initialize()
 
-    abstract fun initStateViewRoot()
+    abstract fun initData()
 
-    abstract fun observeBaseData()
+    abstract fun observeData()
 
 
 }

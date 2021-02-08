@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/ll_root"
+        android:id="@+id/ll_class_root"
         android:layout_width="match_parent"
         android:paddingTop="@dimen/dp_40"
         android:layout_height="match_parent"
@@ -16,21 +14,12 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_username"
+            android:id="@+id/tv_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_margin="16dp"
             android:text="哈哈哈哈哈哈哈哈哈" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBook"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            app:spanCount="3"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
     </LinearLayout>
 

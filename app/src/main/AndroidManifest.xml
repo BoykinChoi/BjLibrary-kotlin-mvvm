@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.boykinchoi.read.ui.home.HomeActivity">
+        <activity android:name="com.boykinchoi.read.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.boykinchoi.read.ui.MainActivity"/>
+        <activity android:name="com.boykinchoi.read.ui.home.HomeActivity"/>
 
         <!--今日对条适配方案-->
         <meta-data

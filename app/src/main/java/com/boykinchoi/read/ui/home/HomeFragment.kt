@@ -1,9 +1,9 @@
 package com.boykinchoi.read.ui.home
 
-import android.content.SharedPreferences
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import com.boykinchoi.baselibrary.base.BaseStatusActivity
+import com.boykinchoi.baselibrary.base.BaseFragment
 import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.read.R
 import com.boykinchoi.read.ui.widget.GridItemDecoration
@@ -12,15 +12,24 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Created by BoykinChoi
- * on 2021/1/30
+ * on 2021/2/2
  **/
-class HomeActivity : BaseStatusActivity<HomeViewModel>() {
-    private var bookAdapter: BookAdapter? = null
+class HomeFragment : BaseFragment<HomeViewModel>() {
 
-    override val layoutRes: Int
+    companion object {
+        @JvmStatic
+        fun newInstance(): HomeFragment {
+            val homeFragment = HomeFragment()
+            homeFragment.arguments = Bundle()
+            return homeFragment
+        }
+    }
+
+    private var bookAdapter: BookAdapter? = null
+    override val layoutId: Int
         get() = R.layout.fragment_home
 
-    override val stateRootView: View
+    override val stateRootView: View?
         get() = ll_root
 
     override fun initialize() {
@@ -32,19 +41,18 @@ class HomeActivity : BaseStatusActivity<HomeViewModel>() {
         rvBook.adapter = bookAdapter
         rvBook.addItemDecoration(
                 GridItemDecoration(3, ScreenUtil.dip2px(
-                        this, 15f), false
+                        activity, 15f), false
                 )
         )
     }
 
     override fun initData() {
         //开始请求数据
-        viewModel?.checkVersion()
+        viewModel?.getBaseData()
     }
 
     override fun observeData() {
         observeHomeData()
-        observeVersionData()
     }
 
     private fun observeHomeData() {
@@ -54,12 +62,6 @@ class HomeActivity : BaseStatusActivity<HomeViewModel>() {
                 viewModel?.checkVersion()
             }
             bookAdapter?.setNewInstance(it.bookList)
-        })
-    }
-
-    private fun observeVersionData() {
-        viewModel?.versionData?.observe(this, Observer {
-            ToastUtil.s(it.versionName)
         })
     }
 

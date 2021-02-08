@@ -116,8 +116,8 @@ ext {
     ]
 
     //keystore
-    keystorePath = rootDir.toString() + '\\playtoread.jks'
-    keystorePassword = 'shuzidongli'
-    alias = 'playtoread'
-    aliasPassword = 'shuzidongli'
+    keystorePath = rootDir.toString() + '\\boykinchoi.jks'
+    keystorePassword = 'boykinchoi'
+    alias = 'boykinchoi'
+    aliasPassword = 'boykinchoi'
 }

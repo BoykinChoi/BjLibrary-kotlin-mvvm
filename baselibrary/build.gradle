@@ -67,8 +67,6 @@ dependencies {
     api library.gson
     api library.retrofit2_gson
     api library.retrofit2_adapter
-    api library.rxjava2
-    api library.rxlifecycle2_components
 
     //屏幕适配
     api library.autosize
@@ -84,7 +82,6 @@ dependencies {
     api library.glide
     api library.glide_transformations
     api library.BaseToolbar
-    api library.Immersionbar
     api library.Immersionbar
     //api library.StatusBarUtil
     api library.stateview

@@ -1,6 +1,7 @@
 package com.boykinchoi.read.api
 
 import com.boykinchoi.read.BuildConfig
+import com.boykinchoi.read.api.HostUrl.Companion.HOST_H5_URL
 
 /**
  * Created by BoykinChoi

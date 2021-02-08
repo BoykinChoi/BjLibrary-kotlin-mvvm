@@ -12,5 +12,6 @@ object ApiConstants {
     const val HOME_BOOK_LIST = "study-center/api/readBookRecord/v2/homePageBooks"
 
     const val HOME_USER_INFO = "study-center/api/studyRecordsSummary/v2/homePageUserInfo"
+    const val CHECK_APP_VERSION = "system-general-center/api/appVersion/v1/last"
 
 }
