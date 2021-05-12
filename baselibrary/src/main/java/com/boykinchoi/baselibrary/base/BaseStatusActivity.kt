@@ -26,10 +26,12 @@ abstract class BaseStatusActivity<V : BaseViewModel> : BaseActivity<V>() {
 
     private fun initStateView() {
         stateView = StateView.inject(stateRootView)
-        stateView?.setEmptyResource(R.layout.layout_empty_data)
-        stateView?.setLoadingResource(R.layout.layout_loading)
-        stateView?.setRetryResource(R.layout.layout_load_retry)
-        stateView?.setOnRetryClickListener { initData() }
+        stateView?.let {
+            it.setEmptyResource(R.layout.layout_empty_data)
+            it.setLoadingResource(R.layout.layout_loading)
+            it.setRetryResource(R.layout.layout_load_retry)
+            it.setOnRetryClickListener { initData() }
+        }
     }
 
     /**

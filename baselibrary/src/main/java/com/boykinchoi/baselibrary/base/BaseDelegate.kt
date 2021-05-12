@@ -54,13 +54,15 @@ class BaseDelegate {
      * 此方法会比 recreate() 效果更好
      */
     fun reload() {
-        val intent: Intent = activity.intent
-        activity.overridePendingTransition(0, 0)
-        intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-        activity.finish()
-        activity.overridePendingTransition(0, 0)
-        activity.startActivity(intent)
-        System.gc()
+        activity.run {
+            val intent: Intent = intent
+            overridePendingTransition(0, 0)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            finish()
+            overridePendingTransition(0, 0)
+            startActivity(intent)
+            System.gc()
+        }
     }
 
     fun showLoading() {

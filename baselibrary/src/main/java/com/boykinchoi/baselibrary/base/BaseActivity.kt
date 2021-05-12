@@ -13,13 +13,12 @@ import java.lang.reflect.ParameterizedType
  * on 2021/1/29
  **/
 abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
-    var baseDelegate: BaseDelegate? = null
+    private val baseDelegate: BaseDelegate? by lazy { BaseDelegate(this) }
     var viewModel: V? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
-        baseDelegate = BaseDelegate(this)
         baseDelegate?.onCreate(savedInstanceState)
         viewModel = createViewModel()
         initialize()
@@ -29,7 +28,7 @@ abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
     /**
      * 监听加载框显示/隐藏
      */
-    protected fun observeLoadingDialogState() {
+    private fun observeLoadingDialogState() {
         viewModel?.showLoadingDialog?.observe(this, Observer {
             if (it) showLoadingDialog() else dismissLoadingDialog()
         })
@@ -40,7 +39,7 @@ abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
      *
      * @return
      */
-    protected fun createViewModel(): V? {
+    private fun createViewModel(): V? {
         val genericSuperclass = this.javaClass.genericSuperclass
         //kotlin 通过is判断类型后，若true,则后面会自动转为该类型
         if (genericSuperclass is ParameterizedType

@@ -19,8 +19,9 @@ import java.lang.reflect.ParameterizedType
  * on 2020/12/25
  **/
 abstract class BaseFragment<V : BaseViewModel> : Fragment() {
-    var viewModel: V? = null
-    var stateView: StateView? = null
+    //和Activity共用同一个ViewModel,也可以viewModel = createViewModel()
+    val viewModel: V? by lazy {  (activity as BaseActivity<*>).viewModel as V }
+    private var stateView: StateView? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -32,9 +33,6 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel = createViewModel()
-        //和Activity共用同一个ViewModel
-        viewModel = (activity as BaseActivity<*>).viewModel as V
         initStateView()
         initialize()
         initData()
@@ -45,16 +43,18 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment() {
 
     private fun initStateView() {
         stateView = StateView.inject(stateRootView!!)
-        stateView?.setEmptyResource(R.layout.layout_empty_data)
-        stateView?.setLoadingResource(R.layout.layout_loading)
-        stateView?.setRetryResource(R.layout.layout_load_retry)
-        stateView?.setOnRetryClickListener { initData() }
+        stateView?.let {
+            it.setEmptyResource(R.layout.layout_empty_data)
+            it.setLoadingResource(R.layout.layout_loading)
+            it.setRetryResource(R.layout.layout_load_retry)
+            it.setOnRetryClickListener { initData() }
+        }
     }
 
     /**
      * 监听viewModel加载状态变化
      */
-    protected fun observeLoadState() {
+    private fun observeLoadState() {
         //监听stateView展示状态
         viewModel?.loadState?.observe(this, Observer {
             when (it) {
