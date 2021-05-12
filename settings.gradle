@@ -1,2 +1,2 @@
 include ':app', ':baselibrary'
-rootProject.name='read'
+rootProject.name='bjStar'

@@ -8,10 +8,10 @@ import com.boykinchoi.baselibrary.base.FragmentBasePagerAdapter
 import com.boykinchoi.star.R
 import com.boykinchoi.star.ui.home.ClassFragment
 import com.boykinchoi.star.ui.home.HomeFragment
-import com.boykinchoi.star.ui.home.HomeViewModel
+import com.boykinchoi.star.ui.home.HomeJuHeViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<HomeViewModel>(), RadioGroup.OnCheckedChangeListener {
+class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChangeListener {
     override val layoutRes: Int
         get() = R.layout.activity_main
 

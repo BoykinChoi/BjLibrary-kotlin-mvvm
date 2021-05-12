@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.boykinchoi.baselibrary.base.BaseStatusActivity
 import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.star.R
-import com.boykinchoi.star.ui.widget.GridItemDecoration
+import com.boykinchoi.baselibrary.widget.decoration.GridItemDecoration
 import com.mirkowu.basetoolbar.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -47,8 +47,8 @@ class HomeActivity : BaseStatusActivity<HomeViewModel>() {
 
     private fun observeHomeData() {
         viewModel?.homeData?.observe(this, Observer {
-            tv_username.text = it.userInfo?.studentName
-            tv_username.setOnClickListener {
+            tv_today.text = it.userInfo?.studentName
+            tv_today.setOnClickListener {
                 viewModel?.checkVersion()
             }
             bookAdapter?.setNewInstance(it.bookList)

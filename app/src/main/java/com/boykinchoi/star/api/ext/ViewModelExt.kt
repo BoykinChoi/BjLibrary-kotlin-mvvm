@@ -6,6 +6,7 @@ import com.boykinchoi.baselibrary.base.LoadState
 import com.boykinchoi.baselibrary.network.ApiException
 import com.boykinchoi.baselibrary.network.BaseBean
 import com.boykinchoi.baselibrary.network.StatusCode
+import com.boykinchoi.star.bean.JuHeBaseBean
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -71,5 +72,14 @@ fun <T> BaseBean<T>.dataConvert(): T? {
     if (code == StatusCode.SUCCESS) {
         return data
     } else throw ApiException(message ?: "api exception")
+}
+
+/**
+ * 聚合接合，提取请求成功后真正需要的数据实际类T
+ */
+fun <T> JuHeBaseBean<T>.juHeDataConvert(): T? {
+    if (reason == "success") {
+        return result
+    } else throw ApiException(reason)
 }
 

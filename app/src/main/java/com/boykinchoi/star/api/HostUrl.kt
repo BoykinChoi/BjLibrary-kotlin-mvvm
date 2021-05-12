@@ -9,7 +9,8 @@ import com.boykinchoi.star.BuildConfig
 
 interface HostUrl {
     companion object {
-        const val HOST_URL = BuildConfig.HOST_URL
+//        const val HOST_URL = BuildConfig.HOST_URL
+        const val HOST_URL = "http://v.juhe.cn/"
         //String HOST_URL = "https://pre-app.digitspower.cn/";
         //String HOST_URL = "https://app.digitspower.cn/";
         const val HOST_H5_URL = BuildConfig.HOST_H5_URL

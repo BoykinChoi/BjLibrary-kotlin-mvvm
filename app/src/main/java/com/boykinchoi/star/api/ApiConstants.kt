@@ -14,4 +14,7 @@ object ApiConstants {
     const val HOME_USER_INFO = "study-center/api/studyRecordsSummary/v2/homePageUserInfo"
     const val CHECK_APP_VERSION = "system-general-center/api/appVersion/v1/last"
 
+    /**----------------------------聚合数据接口--------------------------------------**/
+    const val JUHE_HISTORY_TODAY = "todayOnhistory/queryEvent.php"
+
 }

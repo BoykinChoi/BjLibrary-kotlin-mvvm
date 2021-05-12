@@ -34,13 +34,13 @@ class ClassFragment : BaseFragment<HomeViewModel>() {
 
     override fun initData() {
         //开始请求数据
-        viewModel?.checkVersion()
+//        viewModel?.checkVersion()
     }
 
     override fun observeData() {
-        viewModel?.versionData?.observe(this, Observer {
-            tv_info.text = "app version:${it.versionName} app no:${it.versionNo} desc:${it.updateContent}"
-        })
+//        viewModel?.versionData?.observe(this, Observer {
+//            tv_info.text = "app version:${it.versionName} app no:${it.versionNo} desc:${it.updateContent}"
+//        })
     }
 
 }

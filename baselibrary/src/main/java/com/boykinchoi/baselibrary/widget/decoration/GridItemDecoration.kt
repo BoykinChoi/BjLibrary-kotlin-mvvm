@@ -1,4 +1,4 @@
-package com.boykinchoi.star.ui.widget
+package com.boykinchoi.baselibrary.widget.decoration
 
 import android.graphics.Rect
 import android.view.View
