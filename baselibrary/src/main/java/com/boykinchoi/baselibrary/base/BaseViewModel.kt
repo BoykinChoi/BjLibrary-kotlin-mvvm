@@ -15,9 +15,11 @@ import kotlinx.coroutines.async
  **/
 abstract class BaseViewModel : ViewModel() {
     //页面状态
-    val loadState = MutableLiveData<LoadState>()
+    val loadState by lazy { MutableLiveData<LoadState>() }
+
     //加载框状态
-    val showLoadingDialog = MutableLiveData<Boolean>()
+    val showLoadingDialog by lazy { MutableLiveData<Boolean>() }
+
     abstract fun getBaseData()
 
 }

@@ -1,0 +1,32 @@
+package com.boykinchoi.star.design_pattern.abstract_factory;
+
+import com.boykinchoi.star.design_pattern.abstract_factory.factory.BmwFactory;
+import com.boykinchoi.star.design_pattern.abstract_factory.factory.HondaFactory;
+
+/**
+ * @Author: 蔡佰健
+ * @Description:
+ * @Date:Create：in 2021/9/16 10:11
+ */
+public class CarStore {
+    public static final int BRAND_BMW = 1;
+    public static final int BRAND_HONDA = 2;
+
+    public void saleCar(int brand) throws Exception {
+        CarInstall car = null;
+        switch (brand) {
+            case BRAND_BMW:
+                car = new BmwFactory();
+                break;
+            case BRAND_HONDA:
+                car = new HondaFactory();
+                break;
+            default:
+        }
+        if (car == null) {
+            throw new Exception("请指定汽车品牌");
+        }
+        car.installEngine();
+        car.installWheel();
+    }
+}

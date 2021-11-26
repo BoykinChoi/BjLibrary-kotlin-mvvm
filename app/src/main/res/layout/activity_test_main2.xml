@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.boykinchoi.star.myEvent.MyLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp" />
+
+    <Button
+        android:id="@+id/bt_send_common_search"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:text="send_common_search" />
+
+    <Button
+        android:id="@+id/bt_send_control_action"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="send_control_action" />
+
+    <Button
+        android:id="@+id/bt_send_control_index"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="send_control_index" />
+
+
+</com.boykinchoi.star.myEvent.MyLayout>
+

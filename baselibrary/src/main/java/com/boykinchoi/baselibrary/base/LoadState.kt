@@ -5,8 +5,9 @@ package com.boykinchoi.baselibrary.base
  * Created by BoykinChoi
  * on 2021/1/30
  **/
-sealed class LoadState(val msg:String) {
-    class Loading(msg: String = "") : LoadState(msg)
-    class Success(msg: String = "") : LoadState(msg)
-    class Fail(msg: String) : LoadState(msg)
+sealed class LoadState(val msg: String? = null) {
+    class Loading : LoadState()
+    class Success : LoadState()
+    class EmptyData : LoadState()
+    class Fail(errorCode: String? = null, msg: String?) : LoadState(msg)
 }

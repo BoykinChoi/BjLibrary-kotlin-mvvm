@@ -8,34 +8,43 @@ import com.boykinchoi.baselibrary.util.ToastUtil
 import com.github.nukc.stateview.StateView
 
 /**
- * Activity带页面显示状态，加载数据
+ * Activity基类 带页面显示状态stateView，需要覆盖stateRootView属性
  * Created by BoykinChoi
  * on 2021/2/1
  **/
 abstract class BaseStatusActivity<V : BaseViewModel> : BaseActivity<V>() {
-    var stateView: StateView? = null
+
+    /**
+     * 状态布局根View
+     */
+    open val stateRootView: View? = null
+
+    /**
+     * 状态View
+     */
+    private var stateView: StateView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initStateView()
         initData()
-        observeLoadState()
-        //监听页面数据变化
         observeData()
     }
 
     private fun initStateView() {
-        stateView = StateView.inject(stateRootView)
-        stateView?.let {
-            it.setEmptyResource(R.layout.layout_empty_data)
-            it.setLoadingResource(R.layout.layout_loading)
-            it.setRetryResource(R.layout.layout_load_retry)
-            it.setOnRetryClickListener { initData() }
+        stateRootView?.let {
+            stateView = StateView.inject(it).apply {
+                setEmptyResource(R.layout.layout_empty_data)
+                setLoadingResource(R.layout.layout_loading)
+                setRetryResource(R.layout.layout_load_retry)
+                setOnRetryClickListener { initData() }
+            }
+            observeLoadState()
         }
     }
 
     /**
-     * 监听viewModel页面加载状态变化
+     * 监听stateView展示状态
      */
     protected fun observeLoadState() {
         viewModel?.loadState?.observe(this, Observer {
@@ -45,12 +54,13 @@ abstract class BaseStatusActivity<V : BaseViewModel> : BaseActivity<V>() {
                     stateView?.showRetry()
                     ToastUtil.l(it.msg)
                 }
+                is LoadState.EmptyData -> stateView?.showEmpty()
                 is LoadState.Loading -> stateView?.showLoading()
+                else -> {
+                }
             }
         })
     }
-
-    abstract val stateRootView: View
 
     abstract fun initData()
 

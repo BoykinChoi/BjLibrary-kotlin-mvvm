@@ -3,9 +3,9 @@ package com.boykinchoi.star.ui.home
 import androidx.lifecycle.MutableLiveData
 import com.boykinchoi.baselibrary.base.BaseViewModel
 import com.boykinchoi.star.api.RetrofitClient
-import com.boykinchoi.star.api.dataConvert
-import com.boykinchoi.star.api.launch
-import com.boykinchoi.star.api.launchBase
+import com.boykinchoi.baselibrary.network.ext.dataConvert
+import com.boykinchoi.baselibrary.network.ext.launch
+import com.boykinchoi.baselibrary.network.ext.launchBase
 import com.boykinchoi.star.bean.HomeDataBean
 import com.boykinchoi.star.bean.VersionBean
 import kotlinx.coroutines.async

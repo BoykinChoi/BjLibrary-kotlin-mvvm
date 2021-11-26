@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.boykinchoi.baselibrary.base.BaseFragment
+import com.boykinchoi.baselibrary.base.BaseStatusFragment
 import com.boykinchoi.baselibrary.widget.decoration.ColorItemDecoration
 import com.boykinchoi.star.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
+import kotlin.time.days
 
 /**
  * Created by BoykinChoi
  * on 2021/2/2
  **/
-class HomeFragment : BaseFragment<HomeJuHeViewModel>() {
+class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
 
     companion object {
         @JvmStatic
@@ -57,6 +59,7 @@ class HomeFragment : BaseFragment<HomeJuHeViewModel>() {
         val today = "${year}年${month}月${day}日"
         tv_today.text = today
         val date = "${month}/${day}"
+//        val date = "3/32"
         viewModel?.getHistoryToadyData(date)
     }
 

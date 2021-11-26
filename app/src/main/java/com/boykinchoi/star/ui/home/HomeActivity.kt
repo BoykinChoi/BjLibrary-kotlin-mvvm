@@ -6,6 +6,9 @@ import com.boykinchoi.baselibrary.base.BaseStatusActivity
 import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.star.R
 import com.boykinchoi.baselibrary.widget.decoration.GridItemDecoration
+import com.boykinchoi.star.bean.Boss
+import com.boykinchoi.star.bean.BossImpl
+import com.boykinchoi.star.bean.StaffImpl
 import com.mirkowu.basetoolbar.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 

@@ -1,6 +1,7 @@
 package com.boykinchoi.star.api.service
 
 import com.boykinchoi.baselibrary.network.BaseBean
+import com.boykinchoi.baselibrary.network.JuHeBaseBean
 import com.boykinchoi.star.api.ApiConstants
 import com.boykinchoi.star.bean.*
 import retrofit2.http.GET
