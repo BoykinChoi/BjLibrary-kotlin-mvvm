@@ -1,5 +1,6 @@
 package com.boykinchoi.star
 
+import com.boykinchoi.star.coroutine.CoroutineTest
 import com.boykinchoi.star.design_pattern.abstract_factory.CarStore
 import com.boykinchoi.star.design_pattern.adapter.BritishCharger
 import com.boykinchoi.star.design_pattern.bridge.phone.AndroidPhone
@@ -43,6 +44,7 @@ import com.boykinchoi.star.design_pattern.visitor.company.Tencent
 import com.boykinchoi.star.design_pattern.visitor.visitor.NationalLeaderVisitor
 import com.boykinchoi.star.design_pattern.visitor.visitor.ProvincialLeaderVisitor
 import com.boykinchoi.star.myHandler.MyMessage
+import com.boykinchoi.star.reflect.ReflectTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -320,6 +322,97 @@ class ExampleUnitCoroutineTest {
 
         println(JTest().prop)
         JTest().prop = "Hello,Thank you,Thank you very much"
+    }
+
+    @Test
+    fun testCollection() {
+        println("-------------for--------------------")
+        for(i in 1..6) print(i)
+        println("")
+        for(i in 7 downTo 1) print(i)
+        println("")
+        println("-------------plus--------minus--------------------")
+        val numbers = listOf("one", "two", "three", "four")
+        // plus
+        val plusList = numbers + "five"
+        println(plusList)
+        // minus
+        val minusList = numbers - listOf("three", "four")
+        println(minusList)
+        println("-----------------过滤 filter------------------------")
+        // 过滤 filter
+        println(numbers.filter { it.length > 4 })
+        println(numbers.filterNot { it.length == 4 })
+        println(numbers.filterIndexed { index, s -> index > 3 })
+        val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key11" to 11)
+        val filteredMap = numbersMap.filter { (key, value) -> key.endsWith("1") && value > 10 }
+        println(filteredMap)
+
+        println("----------------划分 partition------------------------")
+        // 划分 partition 过滤集合并且将不匹配的元素存放在一个单独的列表中
+        val (match,rest) = numbers.partition { it.length>3 }
+        println(match)
+        println(rest)
+
+        println("----------------检验------------------------")
+        // 检验
+        // 如果至少有一个元素匹配给定谓词，那么 any() 返回 true。
+        // 如果没有元素与给定谓词匹配，那么 none() 返回 true。
+        // 如果所有元素都匹配给定谓词，那么 all() 返回 true。注意，在一个空集合上使用任何有效的谓词去调用 all() 都会返回 true
+        // any() 和 none() 也可以不带谓词使用：在这种情况下它们只是用来检查集合是否为空
+        println(numbers.any { it.endsWith("e") })
+        println(numbers.none { it.endsWith("a") })
+        println(numbers.all { it.endsWith("e") })
+
+        println("----------------分组 groupBy------------------------")
+        val numbers2 = listOf("one", "two", "three", "four", "five", "six")
+        // 分组 groupBy
+        println(numbers2.groupBy { it.first().toUpperCase() })
+        println(
+            numbers2.groupBy(
+                keySelector = { it.first() },
+                valueTransform = { it.toUpperCase() })
+        )
+        println("--------------groupBy eachCount 统计分组数量---------------")
+        //groupBy eachCount 统计分组数量
+        println(numbers2.groupingBy { it.first() }.eachCount())
+
+        println("--------------取集合一部分--------------")
+        //slice() 返回具有给定索引的集合元素列表。 索引既可以是作为区间传入的也可以是作为整数值的集合传入的
+        println(numbers2.slice(1..3))
+        println(numbers2.slice(1..5 step 2))
+        println(numbers2.slice(setOf(2,3,5)))
+
+        println("------------take--drop---takeWhile-----dropWhile-------")
+        //take 从头开始获取指定数量的元素,akeLast从最后开始获取指定数量的元素
+        println(numbers2.take(4))
+        println(numbers2.takeLast(4))
+        println(numbers2.drop(1))
+        println(numbers2.dropLast(3))
+
+        //takeWhile它将不停获取元素直到排除与谓词匹配的首个元素,(就是一直取出元素直到条件成立那个元素则停止取出)
+        println(numbers2.takeWhile { !it.startsWith('f') })
+        println(numbers2.takeLastWhile { it != "three" })
+        println(numbers2.dropWhile { it.length == 3 })
+        println(numbers2.dropLastWhile { it.contains('i') })
+
+    }
+
+    @Test
+    fun testReflect(){
+        ReflectTest().run {
+//            printFields()
+//            printMethods()
+//             getPrivateMethods()
+            modifyPrivateFiled()
+        }
+    }
+
+    @Test
+    fun testCoroutine(){
+        CoroutineTest().run {
+            testCoroutineContext()
+        }
     }
 
     @Test

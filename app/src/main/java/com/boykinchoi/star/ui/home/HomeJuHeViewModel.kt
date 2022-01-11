@@ -9,6 +9,7 @@ import com.boykinchoi.star.api.RetrofitClient
 import com.boykinchoi.star.bean.HistoryTodayBean
 import kotlinx.coroutines.async
 import me.jessyan.autosize.utils.LogUtils
+import java.util.*
 
 /**
  * 首页ViewModel2 使用聚合数据
@@ -18,6 +19,8 @@ import me.jessyan.autosize.utils.LogUtils
 
 class HomeJuHeViewModel : BaseViewModel() {
     val historyTodayData by lazy { MutableLiveData<MutableList<HistoryTodayBean>>() }
+
+    val calendar by lazy { Calendar.getInstance() }
 
     override fun getBaseData() {
         //not to do sth

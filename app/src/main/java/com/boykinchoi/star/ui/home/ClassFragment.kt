@@ -3,19 +3,17 @@ package com.boykinchoi.star.ui.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
-import androidx.lifecycle.Observer
 import com.boykinchoi.baselibrary.base.BaseFragment
-import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.star.R
 import kotlinx.android.synthetic.main.fragment_class.*
 import me.jessyan.autosize.utils.LogUtils
+import java.util.*
 
 /**
  * Created by BoykinChoi
  * on 2021/2/2
  **/
-class ClassFragment : BaseFragment<HomeViewModel>() {
+class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
     companion object {
         @JvmStatic
         fun newInstance(): ClassFragment {
@@ -32,7 +30,7 @@ class ClassFragment : BaseFragment<HomeViewModel>() {
 //        get() = ll_class_root
 
     override fun initialize() {
-        tv_info.setOnClickListener { ToastUtil.s(viewModel?.homeData?.value?.bookList?.get(0)?.bookChineseName) }
+//        tv_info.setOnClickListener { ToastUtil.s(viewModel?.homeData?.value?.bookList?.get(0)?.bookChineseName) }
         bt_test.setOnClickListener {
 //            LogUtils.d("bt_test onclick")
             testScheme()
@@ -55,8 +53,8 @@ class ClassFragment : BaseFragment<HomeViewModel>() {
 //        })
     }
 
-    private fun testLeak(){
-        startActivity(Intent(activity,LeakActivity::class.java))
+    private fun testLeak() {
+        startActivity(Intent(activity, LeakActivity::class.java))
     }
 
     /**
@@ -103,12 +101,26 @@ class ClassFragment : BaseFragment<HomeViewModel>() {
     }
      */
     private fun testScheme() {
+        val date = viewModel?.calendar?.let {
+            val day = if (it.get(Calendar.DAY_OF_MONTH) < 10) {
+                "0${it.get(Calendar.DAY_OF_MONTH)}"
+            } else {
+                it.get(Calendar.DAY_OF_MONTH)
+            }
+            "${it.get(Calendar.YEAR)}${it.get(Calendar.MONTH) + 1}${day}"
+        }
+        LogUtils.d("date fuck=" + date)
 //        val url = "wyt://xxtb_all/mod_course/player?course_id=3263"
-//        val url = "wyt://glkt/mod_home/main"
-//        val url = "wyt://glkt/mod_course/subject?subject_id=312"
-//          val url = "wyt://glkt/mod_course/player?course_id=3263"
+        val url = "wyt://glkt_yhzh/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
+//        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
+//        val url = "wyt://glkt_custom/mod_home/main?index=4"
+//        val url = "wyt://glkt/mod_zxx/search_tv"
+//                val url = "wyt://glkt/mod_home/main?index=3&sys_date=20211207"
+//        val url = "wyt://glkt_yhzh/mod_course/subject?subject_id=312&sys_date=20211130"
+//          val url = "wyt://glkt_yhzh/mod_course/player?course_id=3263&sys_date=20211130"
 //          val url = "wyt://glkt/mod_course/sync?nianji_id=9&xueke_id=29&press_id=263&xueduan_id=1"
-          val url = "wyt://xxtb_all/mod_course/player?course_id=7918"
+//          val url = "wyt://glkt/mod_course/sync"
+//          val url = "wyt://xxtb_all/mod_course/player?course_id=7918"
 //          val url = "wyt://glkt/mod_course/sync?nianji_id=9"
 //        val url = "wyt://glkt_jtb/mod_home/main"
 //        val url = "xuelejia://main/module_user/login?" +

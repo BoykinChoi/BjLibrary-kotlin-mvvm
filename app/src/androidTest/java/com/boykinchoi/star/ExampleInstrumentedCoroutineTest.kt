@@ -4,6 +4,7 @@ import android.os.Handler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.boykinchoi.baselibrary.util.ToastUtil
+import com.boykinchoi.star.coroutine.CoroutineTest
 import com.boykinchoi.star.myHandler.MyHandler
 import com.boykinchoi.star.myHandler.MyLopper
 import com.boykinchoi.star.myHandler.MyMessage
@@ -47,5 +48,12 @@ class ExampleInstrumentedCoroutineTest {
             testHandler.sendMessage(msg)
             println("message send")
         }.start()
+    }
+
+
+    @Test
+    fun testCoroutine(){
+        val testcoroutine = CoroutineTest()
+        testcoroutine.test()
     }
 }

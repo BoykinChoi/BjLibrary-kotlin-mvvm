@@ -1,6 +1,5 @@
 package com.boykinchoi.star.myHandler;
 
-import android.os.Handler;
 import android.os.SystemClock;
 
 /**

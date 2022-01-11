@@ -5,6 +5,7 @@ import android.widget.RadioGroup
 import androidx.core.content.edit
 import com.boykinchoi.baselibrary.base.BaseActivity
 import com.boykinchoi.baselibrary.base.FragmentBasePagerAdapter
+import com.boykinchoi.baselibrary.util.OnlyValueUtil
 import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.star.R
 import com.boykinchoi.star.bean.BigBossImpl
@@ -17,10 +18,8 @@ import com.boykinchoi.star.myHandler.MyMessage
 import com.boykinchoi.star.ui.home.ClassFragment
 import com.boykinchoi.star.ui.home.HomeFragment
 import com.boykinchoi.star.ui.home.HomeJuHeViewModel
+import com.boykinchoi.star.ui.home.MeFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import android.os.Handler
-import android.os.Message
-import java.lang.Exception
 
 class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChangeListener {
 
@@ -33,7 +32,7 @@ class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChan
         val fragments = mutableListOf(
             HomeFragment.newInstance(),
             ClassFragment.newInstance(),
-            ClassFragment.newInstance()
+            MeFragment.newInstance()
         )
         val pagerAdapter = FragmentBasePagerAdapter(supportFragmentManager, fragments)
         vp_home.adapter = pagerAdapter
@@ -67,11 +66,14 @@ class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChan
         staffD.askHelp(boosD)
         staffE.askHelp(bossC)
 
-        testMyHandler()
+        val mac1 = OnlyValueUtil.DeviceUtils.getMacAddressByInetAddress()
+        val mac2 = OnlyValueUtil.DeviceUtils.getMacAddressByNetworkInterface()
+//        ToastUtil.l("getMacAddressByInetAddress()=" + mac1 + "\n" + "getMacAddressByNetworkInterface()=" + mac2)
+
+//        testMyHandler()
     }
 
-
-    private fun testMyHandler(){
+    private fun testMyHandler() {
         var testHandler: TestHandler? = null
         Thread {
             MyLopper.prepare()
@@ -81,7 +83,7 @@ class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChan
 
         try {
             Thread.sleep(500)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         Thread {
