@@ -102,21 +102,32 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
      */
     private fun testScheme() {
         val date = viewModel?.calendar?.let {
+            val month = if (it.get(Calendar.MONTH) < 10) {
+                "0${it.get(Calendar.MONTH) + 1}"
+            } else {
+                it.get(Calendar.MONTH) + 1
+            }
             val day = if (it.get(Calendar.DAY_OF_MONTH) < 10) {
                 "0${it.get(Calendar.DAY_OF_MONTH)}"
             } else {
                 it.get(Calendar.DAY_OF_MONTH)
             }
-            "${it.get(Calendar.YEAR)}${it.get(Calendar.MONTH) + 1}${day}"
+            "${it.get(Calendar.YEAR)}${month}${day}"
         }
         LogUtils.d("date fuck=" + date)
 //        val url = "wyt://xxtb_all/mod_course/player?course_id=3263"
-        val url = "wyt://glkt_yhzh/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
+//        val url = "wyt://glkt_yhzh/mod_home/main?index=${
+//            et_input.text.toString().trim()
+//        }&sys_date=${date}"
 //        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
-//        val url = "wyt://glkt_custom/mod_home/main?index=4"
-//        val url = "wyt://glkt/mod_zxx/search_tv"
+        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}"
+//        val url = "wyt://glkt_custom/mod_course/subject?subject_id=15"
+//        val url = "wyt://glkt_custom/mod_zxx/search_tv"
+//        val url = "wyt://zxxtb/mod_course/sync?press_id=44"
+//        val url = "wyt://glkt/mod_user/study?position=1"
+//        val url = "wyt://glkt/mod_user/study"
 //                val url = "wyt://glkt/mod_home/main?index=3&sys_date=20211207"
-//        val url = "wyt://glkt_yhzh/mod_course/subject?subject_id=312&sys_date=20211130"
+//        val url = "wyt://glkt_custom/mod_course/subject?subject_id=312&sys_date=20211130"
 //          val url = "wyt://glkt_yhzh/mod_course/player?course_id=3263&sys_date=20211130"
 //          val url = "wyt://glkt/mod_course/sync?nianji_id=9&xueke_id=29&press_id=263&xueduan_id=1"
 //          val url = "wyt://glkt/mod_course/sync"
@@ -128,7 +139,7 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
         try {
             val uri = Uri.parse(url)
             val intent = Intent(Intent.ACTION_VIEW, uri)
-            intent.flags = Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT
+//            intent.flags = Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT
             startActivity(intent)
         } catch (e: Exception) {
             e.printStackTrace()
