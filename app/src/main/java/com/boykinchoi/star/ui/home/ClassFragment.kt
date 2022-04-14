@@ -1,6 +1,7 @@
 package com.boykinchoi.star.ui.home
 
 import android.content.Intent
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import com.boykinchoi.baselibrary.base.BaseFragment
@@ -36,6 +37,7 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
             testScheme()
 //            testLeak()
         }
+        val rect = Rect()
 //        bt_test.setOnTouchListener { v, event ->
 //            LogUtils.d("bt_test onTouch ${event.action}")
 //            return@setOnTouchListener true
@@ -115,12 +117,12 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
             "${it.get(Calendar.YEAR)}${month}${day}"
         }
         LogUtils.d("date fuck=" + date)
-//        val url = "wyt://xxtb_all/mod_course/player?course_id=3263"
-//        val url = "wyt://glkt_yhzh/mod_home/main?index=${
-//            et_input.text.toString().trim()
-//        }&sys_date=${date}"
+//        val url = "wyt://glkt/mod_course/player?course_id=3263"
+        val url = "wyt://glkt_yhzh/mod_home/main?index=${
+            et_input.text.toString().trim()
+        }&sys_date=${date}"
 //        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
-        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}"
+//        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}"
 //        val url = "wyt://glkt_custom/mod_course/subject?subject_id=15"
 //        val url = "wyt://glkt_custom/mod_zxx/search_tv"
 //        val url = "wyt://zxxtb/mod_course/sync?press_id=44"
