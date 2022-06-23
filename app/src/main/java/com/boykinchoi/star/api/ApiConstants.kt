@@ -8,6 +8,7 @@ package com.boykinchoi.star.api
 object ApiConstants {
     //登录
     const val LOGIN = "user-center/api/account/v1/login"
+    const val PWD_LOGIN = "user-center/api/account/v1/pwd/login"
     //首页书本列表
     const val HOME_BOOK_LIST = "study-center/api/readBookRecord/v2/homePageBooks"
 

@@ -2,10 +2,11 @@ package com.boykinchoi.star.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.boykinchoi.baselibrary.base.BaseViewModel
-import com.boykinchoi.star.api.RetrofitClient
 import com.boykinchoi.baselibrary.network.ext.dataConvert
-import com.boykinchoi.baselibrary.network.ext.launch
-import com.boykinchoi.baselibrary.network.ext.launchBase
+import com.boykinchoi.baselibrary.network.ext.fetchLaunch
+import com.boykinchoi.baselibrary.network.ext.fetchLaunchBase
+import com.boykinchoi.star.api.RetrofitClient
+import com.boykinchoi.star.app.ValueConfig
 import com.boykinchoi.star.bean.HomeDataBean
 import com.boykinchoi.star.bean.VersionBean
 import kotlinx.coroutines.async
@@ -20,27 +21,32 @@ class HomeViewModel : BaseViewModel() {
     var versionData: MutableLiveData<VersionBean> = MutableLiveData()
 
     override fun getBaseData() {
-        launch(
-                {
-                    val userInfoBase = async { RetrofitClient.testService.homeUserInfo() }
-                    val bookListBase = async { RetrofitClient.testService.homeBookList() }
-                    val homeDataBean = HomeDataBean(userInfoBase.await().dataConvert(),
-                            bookListBase.await().dataConvert())
-                    homeData.value = homeDataBean
-                },
-                {
-                    //loadState.value = LoadState.Fail(it.message ?: "http exception")
+        fetchLaunch(
+            block = {
+                RetrofitClient.testService.let {
+                    if (ValueConfig.pToken.isEmpty()) {
+                        ValueConfig.pToken =
+                            async {
+                                it.login("18302015102", "c66666666")
+                            }.await().dataConvert()?.token.toString()
+                    }
+                    val userInfo = async { it.homeUserInfo() }.await().dataConvert()
+                    val bookList = async { it.homeBookList() }.await().dataConvert()
+                    homeData.value = HomeDataBean(userInfo, bookList)
                 }
+
+            },
+            onError = {
+                //loadState.value = LoadState.Fail(msg = it.message ?: "http exception")
+            }
         )
     }
 
     fun checkVersion() {
-        launchBase(true, {
+        fetchLaunchBase(block = {
             val versionBase = RetrofitClient.testService
-                    .checkVersion("vivo", "1.7.0", 1)
+                .checkVersion("vivo", "1.7.0", 1)
             versionData.value = versionBase.dataConvert()
-        }, {
-            //not to do sth
         })
     }
 

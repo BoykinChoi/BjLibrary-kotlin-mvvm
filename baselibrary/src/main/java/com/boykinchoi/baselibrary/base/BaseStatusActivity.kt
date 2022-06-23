@@ -12,7 +12,7 @@ import com.github.nukc.stateview.StateView
  * Created by BoykinChoi
  * on 2021/2/1
  **/
-abstract class BaseStatusActivity<V : BaseViewModel> : BaseActivity<V>() {
+abstract class BaseStatusActivity<M : BaseViewModel> : BaseActivity<M>() {
 
     /**
      * 状态布局根View
@@ -40,7 +40,7 @@ abstract class BaseStatusActivity<V : BaseViewModel> : BaseActivity<V>() {
                 setOnRetryClickListener { initData() }
             }
             observeLoadState()
-        }
+        } ?: throw Exception("use StatusActivity must be inject state root view")
     }
 
     /**

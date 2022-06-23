@@ -4,9 +4,11 @@ import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseFragment
-import com.boykinchoi.star.R
-import kotlinx.android.synthetic.main.fragment_class.*
+import com.boykinchoi.star.databinding.FragmentClassBinding
 import me.jessyan.autosize.utils.LogUtils
 import java.util.*
 
@@ -24,15 +26,20 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
         }
     }
 
-    override val layoutId: Int
-        get() = R.layout.fragment_class
+    private lateinit var viewBinding: FragmentClassBinding
 
-//    override val stateRootView: View?
-//        get() = ll_class_root
+    override fun viewBind(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToRoot: Boolean
+    ): ViewBinding {
+        viewBinding = FragmentClassBinding.inflate(inflater, container, attachToRoot)
+        return viewBinding
+    }
 
     override fun initialize() {
 //        tv_info.setOnClickListener { ToastUtil.s(viewModel?.homeData?.value?.bookList?.get(0)?.bookChineseName) }
-        bt_test.setOnClickListener {
+        viewBinding.btTest.setOnClickListener {
 //            LogUtils.d("bt_test onclick")
             testScheme()
 //            testLeak()
@@ -117,10 +124,10 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
             "${it.get(Calendar.YEAR)}${month}${day}"
         }
         LogUtils.d("date fuck=" + date)
-//        val url = "wyt://glkt/mod_course/player?course_id=3263"
-        val url = "wyt://glkt_yhzh/mod_home/main?index=${
-            et_input.text.toString().trim()
-        }&sys_date=${date}"
+        val url = "wyt://glkt/mod_course/player?course_id=3263"
+//        val url = "wyt://glkt_yhzh/mod_home/main?index=${
+//            et_input.text.toString().trim()
+//        }&sys_date=${date}"
 //        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
 //        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}"
 //        val url = "wyt://glkt_custom/mod_course/subject?subject_id=15"

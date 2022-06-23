@@ -2,8 +2,6 @@ package com.boykinchoi.baselibrary.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.boykinchoi.baselibrary.base.LoadState
-import kotlinx.coroutines.async
 
 /**
  * ViewModel基类
@@ -20,6 +18,8 @@ abstract class BaseViewModel : ViewModel() {
     //加载框状态
     val showLoadingDialog by lazy { MutableLiveData<Boolean>() }
 
-    abstract fun getBaseData()
+    open fun getBaseData() {
+
+    }
 
 }

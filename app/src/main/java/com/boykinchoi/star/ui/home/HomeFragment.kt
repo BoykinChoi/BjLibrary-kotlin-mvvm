@@ -1,15 +1,16 @@
 package com.boykinchoi.star.ui.home
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.boykinchoi.baselibrary.base.BaseFragment
+import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseStatusFragment
 import com.boykinchoi.baselibrary.widget.decoration.ColorItemDecoration
-import com.boykinchoi.star.R
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.boykinchoi.star.coroutine.CoroutineTest
+import com.boykinchoi.star.databinding.FragmentHomeBinding
 import java.util.*
-import kotlin.time.days
 
 /**
  * Created by BoykinChoi
@@ -26,13 +27,21 @@ class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
         }
     }
 
-    private val bookAdapter: BookAdapter? by lazy { BookAdapter() }
+    private lateinit var viewBinding: FragmentHomeBinding
+
     private val historyToadyAdapter: HistoryTodayAdapter? by lazy { HistoryTodayAdapter() }
-    override val layoutId: Int
-        get() = R.layout.fragment_home
 
     override val stateRootView: View?
-        get() = ll_root
+        get() = viewBinding.llRoot
+
+    override fun viewBind(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToRoot: Boolean
+    ): ViewBinding {
+        viewBinding = FragmentHomeBinding.inflate(inflater, container, attachToRoot)
+        return viewBinding
+    }
 
     override fun initialize() {
 //        bookAdapter?.setOnItemClickListener { _, _, position ->
@@ -45,8 +54,16 @@ class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
 //                        activity, 15f), false
 //                )
 //        )
-        rvBook.adapter = historyToadyAdapter
-        rvBook.addItemDecoration(ColorItemDecoration())
+        viewBinding.rvBook.adapter = historyToadyAdapter
+        viewBinding.rvBook.addItemDecoration(ColorItemDecoration())
+
+        // 协程测试
+        CoroutineTest().apply {
+            //testCoroutineStart()
+//            testCoroutineScope()
+//            testCoroutineScope2()
+            testCoroutineScope3()
+        }
     }
 
     override fun initData() {
@@ -57,7 +74,7 @@ class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
         val month = calendar.get(Calendar.MONTH) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val today = "${year}年${month}月${day}日"
-        tv_today.text = today
+        viewBinding.tvToday.text = today
         val date = "${month}/${day}"
 //        val date = "3/32"
         viewModel?.getHistoryToadyData(date)

@@ -38,7 +38,7 @@ abstract class BaseStatusFragment<V : BaseViewModel> : BaseFragment<V>() {
                 setOnRetryClickListener { initData() }
             }
             observeLoadState()
-        }
+        }?: throw Exception("use StatusFragment must be inject state root view")
     }
 
     /**

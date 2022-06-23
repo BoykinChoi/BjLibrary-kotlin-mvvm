@@ -3,6 +3,7 @@ package com.boykinchoi.star.api
 import androidx.annotation.NonNull
 import com.boykinchoi.baselibrary.util.Logger
 import com.boykinchoi.star.BuildConfig
+import com.boykinchoi.star.app.ValueConfig
 import okhttp3.*
 import okio.Buffer
 import org.json.JSONObject
@@ -20,7 +21,6 @@ class ParameterInterceptor : Interceptor {
         const val AUTHORIZATION = "zuulAuthorization"
         const val TIMESTAMP = "timestamp"
         const val SIGNATURE = "signature"
-        const val TEST_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1Iiwic3ViIjoie1wiYWNjb3VudElkXCI6NSxcImRldmljZVR5cGVcIjoxLFwibG9naW5GbGFnXCI6MSxcIm1vYmlsZVwiOlwiMTgzMDIwMTUxMDVcIixcInN0dWRlbnRJZFwiOjUsXCJzdHVkZW50UmVhZEdyYWRlXCI6NSxcInN0dWRlbnRTZXhcIjowfSIsImlhdCI6MTYxMTg4NzQyMX0.zV0K1ZieMVSsSsjmxHJEsXiDWotZbmIhTq78a0rLySk"
     }
 
     @Throws(IOException::class)
@@ -30,7 +30,7 @@ class ParameterInterceptor : Interceptor {
         if (METHOD_GET == oldRequest.method()) {
             newRequest = oldRequest.newBuilder()
                 .addHeader(TIMESTAMP, System.currentTimeMillis().toString())
-                .addHeader(AUTHORIZATION, TEST_TOKEN)
+                .addHeader(AUTHORIZATION, ValueConfig.pToken)
                 .build()
         } else if (METHOD_POST == oldRequest.method()) {
             //POST方式，参数用json形式提交,重make json参数RequestBody
@@ -38,13 +38,13 @@ class ParameterInterceptor : Interceptor {
             val requestBody = makeRequestBody(oldRequest)
             val tempRequest = oldRequest.newBuilder()
                 .url(httpUrl)
-                .addHeader(AUTHORIZATION, TEST_TOKEN)
+                .addHeader(AUTHORIZATION, ValueConfig.pToken)
                 .post(requestBody!!)
                 .build()
             val timeStamp = System.currentTimeMillis().toString()
             newRequest = tempRequest.newBuilder()
                 .url(httpUrl)
-                .addHeader(AUTHORIZATION, TEST_TOKEN)
+                .addHeader(AUTHORIZATION, ValueConfig.pToken)
                 .addHeader(TIMESTAMP, timeStamp)
                 //签名用的timeStamp 必须和Header里的timeStamp一致
                 //.addHeader(SIGNATURE, apiSignature(tempRequest, bodyToString(requestBody), timeStamp))

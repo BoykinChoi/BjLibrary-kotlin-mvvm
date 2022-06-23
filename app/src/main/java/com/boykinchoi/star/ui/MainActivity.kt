@@ -3,15 +3,16 @@ package com.boykinchoi.star.ui
 import android.content.SharedPreferences
 import android.widget.RadioGroup
 import androidx.core.content.edit
+import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseActivity
 import com.boykinchoi.baselibrary.base.FragmentBasePagerAdapter
 import com.boykinchoi.baselibrary.util.OnlyValueUtil
-import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.star.R
 import com.boykinchoi.star.bean.BigBossImpl
 import com.boykinchoi.star.bean.BigStaffImpl
 import com.boykinchoi.star.bean.BossImpl
 import com.boykinchoi.star.bean.StaffImpl
+import com.boykinchoi.star.databinding.ActivityMainBinding
 import com.boykinchoi.star.myHandler.MyHandler
 import com.boykinchoi.star.myHandler.MyLopper
 import com.boykinchoi.star.myHandler.MyMessage
@@ -19,12 +20,18 @@ import com.boykinchoi.star.ui.home.ClassFragment
 import com.boykinchoi.star.ui.home.HomeFragment
 import com.boykinchoi.star.ui.home.HomeJuHeViewModel
 import com.boykinchoi.star.ui.home.MeFragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChangeListener {
 
-    override val layoutRes: Int
-        get() = R.layout.activity_main
+//    override val layoutRes: Int
+//        get() = R.layout.activity_main
+
+    private lateinit var viewBinding: ActivityMainBinding
+
+    override fun bindView(): ViewBinding {
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        return viewBinding
+    }
 
     private val sharedPreferences: SharedPreferences? = null
 
@@ -35,10 +42,12 @@ class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChan
             MeFragment.newInstance()
         )
         val pagerAdapter = FragmentBasePagerAdapter(supportFragmentManager, fragments)
-        vp_home.adapter = pagerAdapter
-        vp_home.offscreenPageLimit = pagerAdapter.count
-        rg_tab.setOnCheckedChangeListener(this)
-        rg_tab.getChildAt(0).performClick()
+        viewBinding.run {
+            vpHome.adapter = pagerAdapter
+            vpHome.offscreenPageLimit = pagerAdapter.count
+            rgTab.setOnCheckedChangeListener(this@MainActivity)
+            rgTab.getChildAt(0).performClick()
+        }
         sharedPreferences?.edit { putBoolean("key", false) }
 
 
@@ -103,9 +112,9 @@ class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChan
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
         when (checkedId) {
-            R.id.rb_home -> vp_home.currentItem = 0
-            R.id.rb_class -> vp_home.currentItem = 1
-            R.id.rb_me -> vp_home.currentItem = 2
+            R.id.rb_home -> viewBinding.vpHome.currentItem = 0
+            R.id.rb_class -> viewBinding.vpHome.currentItem = 1
+            R.id.rb_me -> viewBinding.vpHome.currentItem = 2
         }
     }
 }

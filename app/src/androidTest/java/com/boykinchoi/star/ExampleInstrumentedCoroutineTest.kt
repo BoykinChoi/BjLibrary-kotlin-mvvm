@@ -53,7 +53,7 @@ class ExampleInstrumentedCoroutineTest {
 
     @Test
     fun testCoroutine(){
-        val testcoroutine = CoroutineTest()
-        testcoroutine.test()
+        val testCoroutine = CoroutineTest()
+        testCoroutine.test2()
     }
 }

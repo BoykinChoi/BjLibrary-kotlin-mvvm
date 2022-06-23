@@ -1,10 +1,10 @@
 package com.boykinchoi.baselibrary.base
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -12,13 +12,13 @@ import java.lang.reflect.ParameterizedType
  * Created by BoykinChoi
  * on 2021/1/29
  **/
-abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<M : BaseViewModel> : AppCompatActivity() {
     private val baseDelegate: BaseDelegate? by lazy { BaseDelegate(this) }
-    var viewModel: V? = null
+    var viewModel: M? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutRes)
+        setContentView(bindView().root)
         baseDelegate?.onCreate(savedInstanceState)
         viewModel = createViewModel()
         initialize()
@@ -39,15 +39,15 @@ abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
      *
      * @return
      */
-    private fun createViewModel(): V? {
+    private fun createViewModel(): M? {
         // 反射获取model的真实类型
         val genericSuperclass = this.javaClass.genericSuperclass
         // kotlin 通过is判断类型后，若true,则后面会自动转为该类型
         if (genericSuperclass is ParameterizedType
             && (genericSuperclass).actualTypeArguments.isNotEmpty()
         ) {
-            // 获取第一个泛型参数
-            val viewModelClass = (genericSuperclass).actualTypeArguments[0] as Class<V>
+            // 获取第一个泛型参数类型
+            val viewModelClass = (genericSuperclass).actualTypeArguments[0] as Class<M>
 //            //生成ViewModel实例,ps ViewModelProviders already Deprecated
 //            return ViewModelProviders.of(this).get(viewModelClass)
             return ViewModelProvider(this).get(viewModelClass)
@@ -69,8 +69,10 @@ abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
     }
 
     //抽象属性
-    @get:LayoutRes
-    abstract val layoutRes: Int
+//    @get:LayoutRes
+//    abstract val layoutRes: Int
+
+    abstract fun bindView(): ViewBinding
 
     abstract fun initialize()
 

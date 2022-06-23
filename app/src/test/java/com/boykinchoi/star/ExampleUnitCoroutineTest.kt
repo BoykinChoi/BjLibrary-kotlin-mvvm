@@ -343,7 +343,7 @@ class ExampleUnitCoroutineTest {
         // 过滤 filter
         println(numbers.filter { it.length > 4 })
         println(numbers.filterNot { it.length == 4 })
-        println(numbers.filterIndexed { index, s -> index > 3 })
+        println(numbers.filterIndexed { index, s -> index > 2 })
         val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key11" to 11)
         val filteredMap = numbersMap.filter { (key, value) -> key.endsWith("1") && value > 10 }
         println(filteredMap)
@@ -411,7 +411,8 @@ class ExampleUnitCoroutineTest {
     @Test
     fun testCoroutine(){
         CoroutineTest().run {
-            testCoroutineContext()
+            //testCoroutineContext()
+            testCoroutineStart()
         }
     }
 

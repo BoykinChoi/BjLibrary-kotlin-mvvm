@@ -12,29 +12,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-                <activity android:name="com.boykinchoi.star.ui.MainActivity">
-                    <intent-filter>
-                        <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name="com.boykinchoi.star.ui.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                        <category android:name="android.intent.category.LAUNCHER" />
-                    </intent-filter>
-                </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-<!--                <activity android:name="com.boykinchoi.star.myEvent.TestMainActivity">-->
-<!--                    <intent-filter>-->
-<!--                        <action android:name="android.intent.action.MAIN" />-->
+        <!--                <activity android:name="com.boykinchoi.star.myEvent.TestMainActivity">-->
+        <!--                    <intent-filter>-->
+        <!--                        <action android:name="android.intent.action.MAIN" />-->
 
-<!--                        <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                    </intent-filter>-->
-<!--                </activity>-->
+        <!--                        <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--                    </intent-filter>-->
+        <!--                </activity>-->
 
-<!--        <activity android:name="com.boykinchoi.star.service.remote.TestMainActivity2">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--        <activity android:name="com.boykinchoi.star.service.remote.TestMainActivity2">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
 
         <activity
             android:name="com.boykinchoi.star.ui.home.HomeActivity"
@@ -46,7 +48,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.home.LeakActivity"/>
+        <activity android:name=".ui.home.LeakActivity" />
 
         <!--今日对条适配方案-->
         <meta-data

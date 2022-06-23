@@ -2,12 +2,15 @@ package com.boykinchoi.star.ui.home
 
 import android.os.Handler
 import android.os.Message
+import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseActivity
-import com.boykinchoi.star.R
+import com.boykinchoi.star.databinding.ActivityLeakBinding
 
 class LeakActivity : BaseActivity<HomeJuHeViewModel>() {
-    override val layoutRes: Int
-        get() = R.layout.activity_leak
+
+    override fun bindView(): ViewBinding {
+        return ActivityLeakBinding.inflate(layoutInflater)
+    }
 
     override fun initialize() {
         mHandler.sendEmptyMessageDelayed(0, 24 * 60 * 60)

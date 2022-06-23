@@ -1,15 +1,22 @@
 package com.boykinchoi.star.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseFragment
 import com.boykinchoi.star.R
 import com.boykinchoi.star.coroutine.CoroutineTest
+import com.boykinchoi.star.databinding.FragmentMeBinding
+import kotlinx.android.synthetic.main.fragment_me.*
 
 /**
  * Created by BoykinChoi
  * on 2021/2/2
  **/
 class MeFragment : BaseFragment<HomeJuHeViewModel>() {
+
     companion object {
         @JvmStatic
         fun newInstance(): MeFragment {
@@ -19,14 +26,16 @@ class MeFragment : BaseFragment<HomeJuHeViewModel>() {
         }
     }
 
-    override val layoutId: Int
-        get() = R.layout.fragment_me
-
-//    override val stateRootView: View?
-//        get() = ll_class_root
+    override fun viewBind(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToRoot: Boolean
+    ): ViewBinding = FragmentMeBinding.inflate(inflater, container, attachToRoot)
 
     override fun initialize() {
-
+        tv_home.setOnClickListener {
+            startActivity(Intent(context, HomeActivity::class.java))
+        }
     }
 
     override fun initData() {

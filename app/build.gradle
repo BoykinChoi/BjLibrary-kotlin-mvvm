@@ -108,7 +108,11 @@ android {
         abortOnError false
     }
 
-    dataBinding {
+//    dataBinding {
+//        enabled = true
+//    }
+
+    viewBinding {
         enabled = true
     }
 

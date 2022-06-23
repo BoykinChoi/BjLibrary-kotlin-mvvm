@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -23,7 +24,8 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(layoutId, container, false)
+        val viewBinding = viewBind(inflater,container)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,10 +59,18 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment() {
     fun dismissLoadingDialog() {
         (activity as BaseActivity<*>).dismissLoadingDialog()
     }
+//
+//    @get:LayoutRes
+//    abstract val layoutId: Int
 
-    @get:LayoutRes
-    abstract val layoutId: Int
-
+    /**
+     * ViewBinding
+     */
+    abstract fun viewBind(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToRoot: Boolean = false
+    ): ViewBinding
 
     /**
      * 初始化

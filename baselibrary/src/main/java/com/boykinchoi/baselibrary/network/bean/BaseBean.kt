@@ -1,4 +1,4 @@
-package com.boykinchoi.baselibrary.network
+package com.boykinchoi.baselibrary.network.bean
 
 /**
  * Created by BoykinChoi

@@ -44,7 +44,7 @@ class ToastUtil private constructor() {
                 show(msg, duration)
             }
 
-            toast?.setGravity(Gravity.CENTER, 0, 0)
+            toast?.setGravity(Gravity.BOTTOM, 0, 300)
             toast?.show()
         }
 

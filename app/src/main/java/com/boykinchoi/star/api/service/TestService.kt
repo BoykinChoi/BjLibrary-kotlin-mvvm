@@ -1,30 +1,53 @@
 package com.boykinchoi.star.api.service
 
-import com.boykinchoi.baselibrary.network.BaseBean
-import com.boykinchoi.baselibrary.network.JuHeBaseBean
+import com.boykinchoi.baselibrary.network.bean.BaseBean
+import com.boykinchoi.baselibrary.network.bean.JuHeBaseBean
 import com.boykinchoi.star.api.ApiConstants
 import com.boykinchoi.star.bean.*
-import retrofit2.http.GET
-import retrofit2.http.Query
+import io.reactivex.Observable
+import retrofit2.http.*
+
 
 /**
  * Created by BoykinChoi
  * on 2021/1/5
  **/
 interface TestService {
+
     @GET(ApiConstants.HOME_USER_INFO)
     suspend fun homeUserInfo(): BaseBean<HomeUserInfoBean>
 
     @GET(ApiConstants.HOME_BOOK_LIST)
     suspend fun homeBookList(): BaseBean<MutableList<BookBean>>
 
+    /**
+     * 登录
+     *
+     * @param phone
+     * @param deviceNumber 设备id
+     * @param captcha      验证码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(ApiConstants.PWD_LOGIN)
+    suspend fun login(
+        @Field("phoneNumbers") phone: String?,
+        @Field("password") password: String?,
+        @Field("deviceNumber") deviceNumber: String? = "unknow",
+        @Field("appVersion") appVersion: String? = "1.9.0"
+    ): BaseBean<LoginSuccessBean>
+
+    /**
+     * 检查版本
+     */
     @GET(ApiConstants.CHECK_APP_VERSION)
     suspend fun checkVersion(
         @Query("channel") channel: String,
         @Query("version") version: String,
         @Query("platformType") platformType: Int
-    )
-            : BaseBean<VersionBean>
+    ): BaseBean<VersionBean>
+
+
 
     /**----------------------------聚合数据接口--------------------------------------**/
     /**
@@ -35,7 +58,6 @@ interface TestService {
     suspend fun historyToday(
         @Query("date") date: String,
         @Query("key") apiKey: String
-    )
-            : JuHeBaseBean<MutableList<HistoryTodayBean>>
+    ): JuHeBaseBean<MutableList<HistoryTodayBean>>
 
 }
