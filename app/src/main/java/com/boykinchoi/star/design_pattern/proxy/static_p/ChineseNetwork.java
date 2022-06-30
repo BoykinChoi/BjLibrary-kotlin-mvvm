@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.static_proxy;
+package com.boykinchoi.star.design_pattern.proxy.static_p;
 
 import java.util.HashSet;
 import java.util.Set;

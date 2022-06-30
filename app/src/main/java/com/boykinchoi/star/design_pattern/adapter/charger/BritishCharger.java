@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.adapter;
+package com.boykinchoi.star.design_pattern.adapter.charger;
 
 /**
  * @Author: 蔡佰健
@@ -9,6 +9,6 @@ public class BritishCharger implements IBritishCharger {
 
     @Override
     public void chargeByBritishStandard(int l, int n, int e) {
-        System.out.println("用英式充电器充电，火线零线地线");
+        System.out.println("用英式充电器充电，火线" + l + "零线" + n + "地线" + e);
     }
 }

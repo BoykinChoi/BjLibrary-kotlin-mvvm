@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.static_proxy
+package com.boykinchoi.star.design_pattern.proxy.static_p
 
 /**
  * kotlin 代理属性

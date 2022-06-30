@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.adapter;
+package com.boykinchoi.star.design_pattern.adapter.charger;
 
 /**
  * @Author: 蔡佰健
@@ -16,6 +16,7 @@ public class BritishPhone {
         if (this.chargerAdapter == null) {
             throw new Exception("插头不适合，请使用插头适配器充电");
         }
-//        chargerAdapter.chargeByChineseStandard();
+        System.out.println("我是英式手机");
+        chargerAdapter.chargeByChineseStandard(1,2);
     }
 }

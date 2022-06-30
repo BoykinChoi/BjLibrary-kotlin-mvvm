@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.static_proxy.delegate
+package com.boykinchoi.star.design_pattern.proxy.delegate
 
 /** 委托人，本场景中的游戏菜B
  * 在kotlin 中，委托用关键字by 修饰，by后面就是你委托的对象，可以是一个表达式。因此在本例中，

@@ -40,7 +40,6 @@ class MeFragment : BaseFragment<HomeJuHeViewModel>() {
 
     override fun initData() {
         val coroutineTest = CoroutineTest()
-        coroutineTest.testCoroutineContext()
     }
 
     override fun observeData() {

@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.static_proxy.delegate
+package com.boykinchoi.star.design_pattern.proxy.delegate
 
 /**
  * @Author: 蔡佰健

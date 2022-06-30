@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.adapter;
+package com.boykinchoi.star.design_pattern.adapter.charger;
 
 /**
  * 英式充电
@@ -8,6 +8,10 @@ package com.boykinchoi.star.design_pattern.adapter;
  * @Date:Create：in 2021/10/25 14:04
  */
 public interface IBritishCharger {
-    // 参数分别为火线live，零线null，地线earth
+    /**
+     * @param l 火线live
+     * @param n 零线null
+     * @param e  地线earth
+     */
     void chargeByBritishStandard(int l, int n, int e);
 }

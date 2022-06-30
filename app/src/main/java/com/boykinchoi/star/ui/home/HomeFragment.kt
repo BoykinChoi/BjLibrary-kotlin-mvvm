@@ -62,7 +62,6 @@ class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
             //testCoroutineStart()
 //            testCoroutineScope()
 //            testCoroutineScope2()
-            testCoroutineScope3()
         }
     }
 

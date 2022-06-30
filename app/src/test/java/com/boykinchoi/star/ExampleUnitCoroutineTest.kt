@@ -2,7 +2,13 @@ package com.boykinchoi.star
 
 import com.boykinchoi.star.coroutine.CoroutineTest
 import com.boykinchoi.star.design_pattern.abstract_factory.CarStore
-import com.boykinchoi.star.design_pattern.adapter.BritishCharger
+import com.boykinchoi.star.design_pattern.adapter.animal.AnimalFriendAdapter
+import com.boykinchoi.star.design_pattern.adapter.animal.Cat
+import com.boykinchoi.star.design_pattern.adapter.animal.Dog
+import com.boykinchoi.star.design_pattern.adapter.animal.Man
+import com.boykinchoi.star.design_pattern.adapter.charger.BritishCharger
+import com.boykinchoi.star.design_pattern.adapter.charger.BritishPhone
+import com.boykinchoi.star.design_pattern.adapter.charger.ChargerAdapter
 import com.boykinchoi.star.design_pattern.bridge.phone.AndroidPhone
 import com.boykinchoi.star.design_pattern.bridge.phone.IPhone
 import com.boykinchoi.star.design_pattern.bridge.software.Chrome
@@ -27,16 +33,15 @@ import com.boykinchoi.star.design_pattern.iterator.MusicPlayer2
 import com.boykinchoi.star.design_pattern.mediator.Mediator
 import com.boykinchoi.star.design_pattern.mediator.Person
 import com.boykinchoi.star.design_pattern.observer.User
-import com.boykinchoi.star.design_pattern.prototype.Book
-import com.boykinchoi.star.design_pattern.prototype.CBook
 import com.boykinchoi.star.design_pattern.prototype.CloneTest
 import com.boykinchoi.star.design_pattern.state.*
-import com.boykinchoi.star.design_pattern.static_proxy.ChineseNetwork
-import com.boykinchoi.star.design_pattern.static_proxy.JapaneseNetwork
-import com.boykinchoi.star.design_pattern.static_proxy.WorldNetwork
-import com.boykinchoi.star.design_pattern.static_proxy.delegate.DelegateMan
-import com.boykinchoi.star.design_pattern.static_proxy.delegate.JTest
-import com.boykinchoi.star.design_pattern.static_proxy.delegate.RealGamePlayer
+import com.boykinchoi.star.design_pattern.proxy.static_p.ChineseNetwork
+import com.boykinchoi.star.design_pattern.proxy.static_p.JapaneseNetwork
+import com.boykinchoi.star.design_pattern.proxy.static_p.WorldNetwork
+import com.boykinchoi.star.design_pattern.proxy.delegate.DelegateMan
+import com.boykinchoi.star.design_pattern.proxy.delegate.JTest
+import com.boykinchoi.star.design_pattern.proxy.delegate.RealGamePlayer
+import com.boykinchoi.star.design_pattern.proxy.dynamic_p.DynamicProxyTest
 import com.boykinchoi.star.design_pattern.strategy.CarWashCenter
 import com.boykinchoi.star.design_pattern.visitor.Hotel
 import com.boykinchoi.star.design_pattern.visitor.company.Alibaba
@@ -186,8 +191,15 @@ class ExampleUnitCoroutineTest {
      */
     @Test
     fun testAdapterPattern() {
-        val phone = BritishCharger()
-//        val adapter = ChargerAdapter()
+        val adapter =
+            ChargerAdapter(BritishCharger())
+        val phone = BritishPhone(adapter)
+        phone.chargeing()
+
+        Man().apply {
+            speakTo(AnimalFriendAdapter(Dog()))
+            speakTo(AnimalFriendAdapter(Cat()))
+        }
     }
 
     /**
@@ -248,6 +260,17 @@ class ExampleUnitCoroutineTest {
         japaneseNetwork.access("www.sina.com")
         japaneseNetwork.access("www.hahaha.com")
     }
+
+    /**
+     * 动态代理模式
+     */
+    @Test
+    fun testDynamicProxyPattern(){
+        DynamicProxyTest().apply {
+            test()
+        }
+    }
+
 
     /**
      * 外观模式
@@ -412,7 +435,6 @@ class ExampleUnitCoroutineTest {
     fun testCoroutine(){
         CoroutineTest().run {
             //testCoroutineContext()
-            testCoroutineStart()
         }
     }
 

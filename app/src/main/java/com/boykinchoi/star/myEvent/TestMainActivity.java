@@ -39,6 +39,5 @@ public class TestMainActivity extends AppCompatActivity {
                 LogUtils.d("second on touch"));
 
         CoroutineTest coroutineTest = new CoroutineTest();
-        coroutineTest.test2();
     }
 }

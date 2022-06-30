@@ -1,4 +1,4 @@
-package com.boykinchoi.star.design_pattern.static_proxy.delegate
+package com.boykinchoi.star.design_pattern.proxy.delegate
 
 /**
  * 被委托对象，本场景的游戏代练

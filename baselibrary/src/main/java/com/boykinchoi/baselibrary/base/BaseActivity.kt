@@ -44,12 +44,11 @@ abstract class BaseActivity<M : BaseViewModel> : AppCompatActivity() {
         val genericSuperclass = this.javaClass.genericSuperclass
         // kotlin 通过is判断类型后，若true,则后面会自动转为该类型
         if (genericSuperclass is ParameterizedType
-            && (genericSuperclass).actualTypeArguments.isNotEmpty()
+            && genericSuperclass.actualTypeArguments.isNotEmpty()
         ) {
             // 获取第一个泛型参数类型
-            val viewModelClass = (genericSuperclass).actualTypeArguments[0] as Class<M>
+            val viewModelClass = genericSuperclass.actualTypeArguments[0] as Class<M>
 //            //生成ViewModel实例,ps ViewModelProviders already Deprecated
-//            return ViewModelProviders.of(this).get(viewModelClass)
             return ViewModelProvider(this).get(viewModelClass)
 //            return MyViewModelProvider.createViewModel(this)
         }
