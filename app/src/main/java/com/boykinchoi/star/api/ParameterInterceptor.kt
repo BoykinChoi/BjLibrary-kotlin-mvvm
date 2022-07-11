@@ -122,10 +122,9 @@ class ParameterInterceptor : Interceptor {
         //打印请求log
         Logger.json(jsonData.toString())
 
-        val requestBody = RequestBody.create(
+        return RequestBody.create(
             MediaType.parse("application/json; charset=utf-8"), jsonData.toString()
         )
-        return requestBody
     }
 
     /**

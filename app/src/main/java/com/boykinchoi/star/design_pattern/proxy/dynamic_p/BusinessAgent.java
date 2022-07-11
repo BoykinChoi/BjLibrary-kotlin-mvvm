@@ -14,16 +14,17 @@ public class BusinessAgent implements Sell {
     }
 
     @Override
-    public void sell() {
-        System.out.println("代理：sell前");
-        vendor.sell();
-        System.out.println("代理：sell后");
+    public void ad(String slogan) {
+        System.out.println("代理：广告前");
+        vendor.ad("我们这代理最坑");
+        System.out.println("代理：广告后");
     }
 
     @Override
-    public void ad() {
-        System.out.println("代理：广告前");
-        vendor.ad();
-        System.out.println("代理：广告后");
+    public String sell() {
+        System.out.println("代理：sell前");
+        vendor.sell();
+        System.out.println("代理：sell后");
+        return "BusinessAgent sell";
     }
 }

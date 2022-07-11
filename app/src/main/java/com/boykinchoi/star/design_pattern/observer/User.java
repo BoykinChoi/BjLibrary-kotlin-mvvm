@@ -1,9 +1,5 @@
 package com.boykinchoi.star.design_pattern.observer;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.util.LinkedList;
 import java.util.List;
 

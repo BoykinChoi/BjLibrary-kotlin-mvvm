@@ -43,12 +43,11 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun checkVersion() {
-        fetchLaunchBase(block = {
+        fetchLaunchBase {
             val versionBase = RetrofitClient.testService
                 .checkVersion("vivo", "1.7.0", 1)
             versionData.value = versionBase.dataConvert()
-        })
+        }
     }
-
 
 }

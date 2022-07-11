@@ -6,7 +6,7 @@ package com.boykinchoi.star.design_pattern.proxy.dynamic_p;
  * @Date:Create：in 2022/6/30 13:32
  */
 public interface Sell {
-    void sell();
+    String sell();
 
-    void ad();
+    void ad(String slogan);
 }
