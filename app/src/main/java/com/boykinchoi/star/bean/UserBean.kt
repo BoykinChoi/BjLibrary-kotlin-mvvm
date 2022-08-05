@@ -1,7 +1,7 @@
 package com.boykinchoi.star.bean
 
 import android.content.Context
-import com.boykinchoi.baselibrary.base.BaseApplication
+import com.boykinchoi.baselibrary.base.app.BaseApplication
 import com.boykinchoi.star.app.Constants
 
 

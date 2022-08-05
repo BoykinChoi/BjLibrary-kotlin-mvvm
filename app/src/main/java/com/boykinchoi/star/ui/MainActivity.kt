@@ -82,6 +82,14 @@ class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChan
 //        testMyHandler()
     }
 
+    override fun initData() {
+
+    }
+
+    override fun observeData() {
+
+    }
+
     private fun testMyHandler() {
         var testHandler: TestHandler? = null
         Thread {

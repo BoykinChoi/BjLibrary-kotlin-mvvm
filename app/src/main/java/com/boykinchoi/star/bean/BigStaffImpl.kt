@@ -2,7 +2,7 @@ package com.boykinchoi.star.bean
 
 import com.boykinchoi.star.bean.`interface`.BigBoss
 import com.boykinchoi.star.bean.`interface`.BigStaff
-import me.jessyan.autosize.utils.LogUtils
+//import me.jessyan.autosize.utils.LogUtils
 
 /**
  * @Author: 蔡佰健
@@ -11,7 +11,7 @@ import me.jessyan.autosize.utils.LogUtils
  */
 class BigStaffImpl(private val name: String) : BigStaff {
     override fun service() {
-        LogUtils.d("${name}提供大大的服务")
+//        LogUtils.d("${name}提供大大的服务")
     }
 
     override fun askHelp(bigBoss: BigBoss) {

@@ -1,7 +1,7 @@
 package com.boykinchoi.star.ui.home
 
 import androidx.lifecycle.MutableLiveData
-import com.boykinchoi.baselibrary.base.BaseViewModel
+import com.boykinchoi.baselibrary.base.vm.BaseViewModel
 import com.boykinchoi.baselibrary.network.ext.dataConvert
 import com.boykinchoi.baselibrary.network.ext.fetchLaunch
 import com.boykinchoi.baselibrary.network.ext.fetchLaunchBase

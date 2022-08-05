@@ -38,7 +38,7 @@ ext {
 
             recyclerview_x               : 'androidx.recyclerview:recyclerview:1.1.0',
             constraint_x                 : 'androidx.constraintlayout:constraintlayout:1.1.3',
-            androidX_appcompat           : 'androidx.appcompat:appcompat:1.2.0',
+            androidX_appcompat           : 'androidx.appcompat:appcompat:1.4.0',
 
             logger                       : "com.orhanobut:logger:$ver.log",
             rxjava2                      : "io.reactivex.rxjava2:rxjava:$ver.rxjava2",
@@ -86,7 +86,8 @@ ext {
             NewbieGuide                  : 'com.github.huburt-Hu:NewbieGuide:v2.4.0',//蒙层引导
             pageindicatorview            : 'com.romandanylyk:pageindicatorview:1.0.3',//圆点指示器
             autofittextview              : 'me.grantland:autofittextview:0.2.+',//自动适应TextView
-            stateview              : 'com.github.nukc.stateview:library:1.5.4',//stateview
+            stateview                    : 'com.github.nukc.stateview:library:1.5.4',//stateView
+            TvFocusHandler               : 'io.github.boykinchoi:TvFocusHandler:1.0.0',//TvFocusHandler
 
             amap                         : 'com.amap.api:location:latest.integration',  //高德地图
             ezviz                        : "com.hikvision.ezviz:ezviz-sdk:4.7.1",
@@ -108,8 +109,8 @@ ext {
     ]
 
     //keystore
-    keystorePath = rootDir.toString() + '\\boykinchoi.jks'
-    keystorePassword = 'boykinchoi'
-    alias = 'boykinchoi'
-    aliasPassword = 'boykinchoi'
+    keystorePath = rootDir.toString() + '\\boykin.jks'
+    keystorePassword = 'boykin'
+    alias = 'boykin'
+    aliasPassword = 'boykin'
 }

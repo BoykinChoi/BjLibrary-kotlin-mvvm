@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.boykinchoi.star.R;
 import com.boykinchoi.star.coroutine.CoroutineTest;
 
-import me.jessyan.autosize.utils.LogUtils;
+//import me.jessyan.autosize.utils.LogUtils;
 
 /**
  * @Author: 蔡佰健
@@ -29,15 +29,15 @@ public class TestMainActivity extends AppCompatActivity {
         myLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                LogUtils.d("MyLayout on touch");
+//                LogUtils.d("MyLayout on touch");
                 return false;
             }
         });
-        first.setOnClickListener(v ->
-                LogUtils.d("first on touch"));
-        second.setOnClickListener(v ->
-                LogUtils.d("second on touch"));
-
-        CoroutineTest coroutineTest = new CoroutineTest();
+//        first.setOnClickListener(v ->
+//                LogUtils.d("first on touch"));
+//        second.setOnClickListener(v ->
+//                LogUtils.d("second on touch"));
+//
+//        CoroutineTest coroutineTest = new CoroutineTest();
     }
 }

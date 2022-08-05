@@ -16,8 +16,16 @@ class LeakActivity : BaseActivity<HomeJuHeViewModel>() {
         mHandler.sendEmptyMessageDelayed(0, 24 * 60 * 60)
     }
 
+    override fun initData() {
+
+    }
+
+    override fun observeData() {
+
+    }
+
     private val mHandler: Handler = object : Handler() {
-        override fun handleMessage(msg: Message?) {}
+        override fun handleMessage(msg: Message) {}
     }
 }
 

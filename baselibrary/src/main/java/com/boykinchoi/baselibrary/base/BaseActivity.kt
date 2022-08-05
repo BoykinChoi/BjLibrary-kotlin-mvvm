@@ -1,10 +1,14 @@
 package com.boykinchoi.baselibrary.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.boykinchoi.baselibrary.R
+import com.boykinchoi.baselibrary.base.vm.BaseViewModel
+import com.boykinchoi.baselibrary.util.ToastUtil
+import com.github.nukc.stateview.StateView
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -16,23 +20,59 @@ abstract class BaseActivity<M : BaseViewModel> : AppCompatActivity() {
     private val baseDelegate: BaseDelegate? by lazy { BaseDelegate(this) }
     var viewModel: M? = null
 
+    /**
+     * 状态布局根View，需要使用状态布局时重写
+     */
+    open val stateRootView: View? = null
+
+    /**
+     * 状态View
+     */
+    private var stateView: StateView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(bindView().root)
         baseDelegate?.onCreate(savedInstanceState)
-        viewModel = createViewModel()
+        viewModel = createViewModel().apply {
+            (this as BaseViewModel).showLoading.observe(this@BaseActivity, {
+                if (it) showLoadingDialog() else dismissLoadingDialog()
+            })
+        }
         initialize()
-        observeLoadingDialogState()
+    }
+
+    private fun initStateView() {
+        stateRootView?.let {
+            stateView = StateView.inject(it).apply {
+                setEmptyResource(R.layout.layout_empty_data)
+                setLoadingResource(R.layout.layout_loading)
+                setRetryResource(R.layout.layout_load_retry)
+                setOnRetryClickListener { initData() }
+            }
+            observeLoadState()
+        } ?: throw Exception("use StatusActivity must be inject state root view")
     }
 
     /**
-     * 监听加载框显示/隐藏
+     * 监听stateView展示状态
      */
-    private fun observeLoadingDialogState() {
-        viewModel?.showLoadingDialog?.observe(this, Observer {
-            if (it) showLoadingDialog() else dismissLoadingDialog()
-        })
+    protected fun observeLoadState() {
+        viewModel?.loadState?.observe(this) {
+            when (it) {
+                is LoadState.Success -> stateView?.showContent()
+                is LoadState.Fail -> {
+                    stateView?.showRetry()
+                    ToastUtil.l(it.msg)
+                }
+                is LoadState.EmptyData -> stateView?.showEmpty()
+                is LoadState.Loading -> stateView?.showLoading()
+                else -> {
+                }
+            }
+        }
     }
+
 
     /**
      * 根据泛型V 创建ViewModel实例
@@ -75,4 +115,7 @@ abstract class BaseActivity<M : BaseViewModel> : AppCompatActivity() {
 
     abstract fun initialize()
 
+    abstract fun initData()
+
+    abstract fun observeData()
 }

@@ -3,12 +3,10 @@ package com.boykinchoi.baselibrary.util
 import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.boykinchoi.baselibrary.R
-import com.boykinchoi.baselibrary.base.BaseApplication
+import com.boykinchoi.baselibrary.base.app.BaseApplication
 import kotlinx.android.synthetic.main.transient_notification.view.*
 import java.lang.Error
 

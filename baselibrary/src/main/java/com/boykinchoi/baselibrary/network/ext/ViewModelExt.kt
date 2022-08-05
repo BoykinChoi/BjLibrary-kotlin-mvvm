@@ -1,7 +1,7 @@
 package com.boykinchoi.baselibrary.network.ext
 
 import androidx.lifecycle.viewModelScope
-import com.boykinchoi.baselibrary.base.BaseViewModel
+import com.boykinchoi.baselibrary.base.vm.BaseViewModel
 import com.boykinchoi.baselibrary.base.LoadState
 import com.boykinchoi.baselibrary.network.StatusCode
 import com.boykinchoi.baselibrary.network.bean.BaseBean
@@ -102,17 +102,17 @@ fun BaseViewModel.fetchLaunchBase(
     viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, e ->
         onError?.invoke(e)
         if (showLoading) {
-            showLoadingDialog.value = false
+            this.showLoading.value = false
         }
     }) {
         try {
             if (showLoading) {
-                showLoadingDialog.value = true
+                this@fetchLaunchBase.showLoading.value = true
             }
             block.invoke(this)
         } finally {
             if (showLoading) {
-                showLoadingDialog.value = false
+                this@fetchLaunchBase.showLoading.value = false
             }
             onComplete?.invoke()
         }

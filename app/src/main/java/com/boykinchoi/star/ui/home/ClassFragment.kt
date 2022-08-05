@@ -8,8 +8,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseFragment
+import com.boykinchoi.star.annotation.AnnotationTest
 import com.boykinchoi.star.databinding.FragmentClassBinding
-import me.jessyan.autosize.utils.LogUtils
+import com.boykinchoi.star.generic.Animal
+import com.boykinchoi.star.generic.Cat
+import com.boykinchoi.star.generic.GenericTest
+import com.boykinchoi.star.generic.Herd
+import kotlinx.android.synthetic.main.fragment_class.*
 import java.util.*
 
 /**
@@ -49,6 +54,15 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
 //            LogUtils.d("bt_test onTouch ${event.action}")
 //            return@setOnTouchListener true
 //        }
+
+        GenericTest().apply {
+            val herd = Herd<Cat>()
+            feedCat(herd)
+        }
+
+        AnnotationTest().apply {
+            ganAnnotation()
+        }
     }
 
     override fun initData() {
@@ -123,11 +137,9 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
             }
             "${it.get(Calendar.YEAR)}${month}${day}"
         }
-        LogUtils.d("date fuck=" + date)
-        val url = "wyt://glkt/mod_course/player?course_id=3263"
-//        val url = "wyt://glkt_yhzh/mod_home/main?index=${
-//            et_input.text.toString().trim()
-//        }&sys_date=${date}"
+//        LogUtils.d("date fuck=" + date)
+//        val url = "wyt://glkt/mod_course/player?course_id=3263"
+        val url = "wyt://glkt_yhzh/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
 //        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}&sys_date=${date}"
 //        val url = "wyt://glkt_custom/mod_home/main?index=${et_input.text.toString().trim()}"
 //        val url = "wyt://glkt_custom/mod_course/subject?subject_id=15"

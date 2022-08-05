@@ -1,12 +1,11 @@
 package com.boykinchoi.star.app
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import com.boykinchoi.baselibrary.base.BaseApplication
+import com.boykinchoi.baselibrary.base.app.BaseApplication
 import com.boykinchoi.baselibrary.util.ActivityStackManager
-import com.boykinchoi.star.ui.AdActivity
-import com.boykinchoi.star.ui.MainActivity
+
+//import me.jessyan.autosize.utils.LogUtils
 
 /**
  * Created by BoykinChoi
@@ -16,6 +15,7 @@ class App : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+//        LogUtils.d("fucking App onCreate")
         registerActivityLifecycle()
     }
 

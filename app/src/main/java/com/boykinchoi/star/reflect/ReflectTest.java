@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 
-import me.jessyan.autosize.utils.LogUtils;
+//import me.jessyan.autosize.utils.LogUtils;
 
 /**
  * 反射测试类

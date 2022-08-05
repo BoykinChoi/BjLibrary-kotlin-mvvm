@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.boykinchoi.baselibrary.R
+import com.boykinchoi.baselibrary.base.vm.BaseViewModel
+import com.boykinchoi.baselibrary.util.ToastUtil
+import com.github.nukc.stateview.StateView
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -18,6 +21,16 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<V : BaseViewModel> : Fragment() {
     //和Activity共用同一个ViewModel,也可以viewModel = createViewModel()
     val viewModel: V? by lazy { (activity as BaseActivity<*>).viewModel as V }
+
+    /**
+     * 状态布局根View，不重写则不使用状态View
+     */
+    open val stateRootView: View? = null
+
+    /**
+     * 状态View
+     */
+    private var stateView: StateView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +43,42 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initStateView()
         initialize()
         initData()
         observeData()
+    }
+
+    private fun initStateView() {
+        stateRootView?.let {
+            stateView = StateView.inject(it).apply {
+                setEmptyResource(R.layout.layout_empty_data)
+                setLoadingResource(R.layout.layout_loading)
+                setRetryResource(R.layout.layout_load_retry)
+                setOnRetryClickListener { initData() }
+            }
+            observeLoadState()
+        }
+    }
+
+    /**
+     * 监听stateView展示状态
+     */
+    private fun observeLoadState() {
+        // Fragment使用viewLifecycleOwner代替this https://juejin.cn/post/6915222252506054663
+        viewModel?.loadState?.observe(viewLifecycleOwner,  {
+            when (it) {
+                is LoadState.Success -> stateView?.showContent()
+                is LoadState.Fail -> {
+                    stateView?.showRetry()
+                    ToastUtil.l(it.msg)
+                }
+                is LoadState.EmptyData -> stateView?.showEmpty()
+                is LoadState.Loading -> stateView?.showLoading()
+                else -> {
+                }
+            }
+        })
     }
 
     protected fun createViewModel(): V? {

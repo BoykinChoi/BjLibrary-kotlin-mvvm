@@ -1,2 +1,4 @@
+include ':lib_processor'
+include ':lib_annotation'
 include ':app', ':baselibrary'
 rootProject.name='bjStar'

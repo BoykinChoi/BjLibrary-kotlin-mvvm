@@ -1,5 +1,7 @@
 package com.boykinchoi.star
 
+import com.boykinchoi.star.annotation.AnnotationTest
+import com.boykinchoi.star.closure.gan
 import com.boykinchoi.star.coroutine.CoroutineTest
 import com.boykinchoi.star.design_pattern.abstract_factory.CarStore
 import com.boykinchoi.star.design_pattern.adapter.animal.AnimalFriendAdapter
@@ -48,8 +50,17 @@ import com.boykinchoi.star.design_pattern.visitor.company.Alibaba
 import com.boykinchoi.star.design_pattern.visitor.company.Tencent
 import com.boykinchoi.star.design_pattern.visitor.visitor.NationalLeaderVisitor
 import com.boykinchoi.star.design_pattern.visitor.visitor.ProvincialLeaderVisitor
+import com.boykinchoi.star.flow.FlowTest
+import com.boykinchoi.star.generic.Animal
+import com.boykinchoi.star.generic.GenericTest
+import com.boykinchoi.star.generic.Herd
 import com.boykinchoi.star.myHandler.MyMessage
 import com.boykinchoi.star.reflect.ReflectTest
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -265,7 +276,7 @@ class ExampleUnitCoroutineTest {
      * 动态代理模式
      */
     @Test
-    fun testDynamicProxyPattern(){
+    fun testDynamicProxyPattern() {
         DynamicProxyTest().apply {
             test()
         }
@@ -347,12 +358,15 @@ class ExampleUnitCoroutineTest {
         JTest().prop = "Hello,Thank you,Thank you very much"
     }
 
+    /**
+     * 测试kotlin 集合
+     */
     @Test
     fun testCollection() {
         println("-------------for--------------------")
-        for(i in 1..6) print(i)
+        for (i in 1..6) print(i)
         println("")
-        for(i in 7 downTo 1) print(i)
+        for (i in 7 downTo 1) print(i)
         println("")
         println("-------------plus--------minus--------------------")
         val numbers = listOf("one", "two", "three", "four")
@@ -373,7 +387,7 @@ class ExampleUnitCoroutineTest {
 
         println("----------------划分 partition------------------------")
         // 划分 partition 过滤集合并且将不匹配的元素存放在一个单独的列表中
-        val (match,rest) = numbers.partition { it.length>3 }
+        val (match, rest) = numbers.partition { it.length > 3 }
         println(match)
         println(rest)
 
@@ -404,7 +418,7 @@ class ExampleUnitCoroutineTest {
         //slice() 返回具有给定索引的集合元素列表。 索引既可以是作为区间传入的也可以是作为整数值的集合传入的
         println(numbers2.slice(1..3))
         println(numbers2.slice(1..5 step 2))
-        println(numbers2.slice(setOf(2,3,5)))
+        println(numbers2.slice(setOf(2, 3, 5)))
 
         println("------------take--drop---takeWhile-----dropWhile-------")
         //take 从头开始获取指定数量的元素,akeLast从最后开始获取指定数量的元素
@@ -421,8 +435,11 @@ class ExampleUnitCoroutineTest {
 
     }
 
+    /**
+     * 测试反射
+     */
     @Test
-    fun testReflect(){
+    fun testReflect() {
         ReflectTest().run {
 //            printFields()
 //            printMethods()
@@ -431,13 +448,54 @@ class ExampleUnitCoroutineTest {
         }
     }
 
+    /**
+     * 测试协程
+     */
     @Test
-    fun testCoroutine(){
+    fun testCoroutine() {
         CoroutineTest().run {
             //testCoroutineContext()
         }
     }
 
+    /**
+     * 测试闭包
+     */
+    @Test
+    fun testClosure() {
+        gan()
+    }
+
+    /**
+     * 测试Flow
+     */
+    @Test
+    fun testFlow() {
+//        FlowTest().test()
+    }
+
+    /**
+     * 测试泛型
+     */
+    @Test
+    fun testFanFan() {
+        val intList = mutableListOf(1, 2, 3)
+        val strList = mutableListOf("a", "b", "c")
+        //println("intList class=${intList.javaClass};strList class=${strList.javaClass}")
+
+    }
+
+    /**
+     * 测试自定义注解
+     */
+    @Test
+    fun testAnnotation(){
+        AnnotationTest().ganAnnotation()
+    }
+
+    /**
+     * 测试自定Handler
+     */
     @Test
     fun testMyHandler() {
         Thread {

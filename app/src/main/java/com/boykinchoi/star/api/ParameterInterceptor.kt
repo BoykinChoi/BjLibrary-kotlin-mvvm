@@ -1,7 +1,7 @@
 package com.boykinchoi.star.api
 
 import androidx.annotation.NonNull
-import com.boykinchoi.baselibrary.util.Logger
+import com.boykinchoi.baselibrary.util.BjLogger
 import com.boykinchoi.star.BuildConfig
 import com.boykinchoi.star.app.ValueConfig
 import okhttp3.*
@@ -58,9 +58,9 @@ class ParameterInterceptor : Interceptor {
             val resultBody = response.body()
             val result = resultBody!!.string()
             try {
-                Logger.json(result)
+                BjLogger.json(result)
             } catch (e: Exception) {
-                Logger.w(result)
+                BjLogger.w(result)
             }
             //因为调用ResponseBody.string()后即关闭，后续无法获取内容,so，再次newBuilder
             response = response.newBuilder()
@@ -88,7 +88,7 @@ class ParameterInterceptor : Interceptor {
                 }
                 //当参数以 @MultipartBody 提交时
                 is MultipartBody ->
-                    Logger.i("is MultipartBody")
+                    BjLogger.i("is MultipartBody")
                 //当参数以 @Body 提交时
                 else -> {
                     val bodyString = bodyToString(oldRequest.body())
@@ -117,10 +117,10 @@ class ParameterInterceptor : Interceptor {
         //添加Sign参数
         //newBodyBuilder.add("apisign", MD5Util.ToMD5(Constants.MD5_KEY, data.toString()));
         //Logger.d("请求参数Params=========", apiSign);//打印请求log
-        Logger.d("请求地址RequestUrl=====", oldUrl.url().toString())
-        Logger.d("请求参数Params=========", jsonData.toString())
+        BjLogger.d("请求地址RequestUrl=====", oldUrl.url().toString())
+        BjLogger.d("请求参数Params=========", jsonData.toString())
         //打印请求log
-        Logger.json(jsonData.toString())
+        BjLogger.json(jsonData.toString())
 
         return RequestBody.create(
             MediaType.parse("application/json; charset=utf-8"), jsonData.toString()

@@ -1,6 +1,6 @@
 package com.boykinchoi.star.api
 
-import com.boykinchoi.baselibrary.util.Logger
+import com.boykinchoi.baselibrary.util.BjLogger
 import com.boykinchoi.star.api.service.TestService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,7 +54,7 @@ class RetrofitClient private constructor() : Serializable {
         private val loggingInterceptor: HttpLoggingInterceptor by lazy {
             HttpLoggingInterceptor {
                 //打印retrofit日志
-                Logger.w("RetrofitLog", it + "")
+                BjLogger.w("RetrofitLog", it + "")
             }.setLevel(HttpLoggingInterceptor.Level.BODY)
         }
 

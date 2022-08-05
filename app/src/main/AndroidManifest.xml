@@ -3,8 +3,9 @@
     package="com.boykinchoi.star">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:name="com.boykinchoi.star.app.App"
+        android:name=".app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,45 +13,54 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+<!--        <activity android:name=".app.HahaActivity"></activity>-->
         <activity
-            android:name="com.boykinchoi.star.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!--                <activity android:name="com.boykinchoi.star.myEvent.TestMainActivity">-->
-        <!--                    <intent-filter>-->
-        <!--                        <action android:name="android.intent.action.MAIN" />-->
-
-        <!--                        <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--                    </intent-filter>-->
-        <!--                </activity>-->
-
-        <!--        <activity android:name="com.boykinchoi.star.service.remote.TestMainActivity2">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
-
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
-
+        </activity> <!-- <activity android:name="com.boykinchoi.star.myEvent.TestMainActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <!-- <activity android:name="com.boykinchoi.star.service.remote.TestMainActivity2"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
-            android:name="com.boykinchoi.star.ui.home.HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.boykinchoi.star.ui.AdActivity"
+            android:name=".ui.AdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tv.TvActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />
 
         <activity android:name=".ui.home.LeakActivity" />
 
-        <!--今日对条适配方案-->
+        <activity android:name=".lifecycle.LifecycleActivity" />
+
+        <!-- 自定的Provider -->
+        <provider
+            android:name=".app.MyInitProvider"
+            android:authorities="com.boykinchoi.star.my-init-provider"
+            android:exported="false"
+            android:multiprocess="true" />
+
+        <!-- 今日对条适配方案 -->
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />

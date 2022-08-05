@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
-import com.boykinchoi.baselibrary.base.BaseStatusFragment
+import com.boykinchoi.baselibrary.base.BaseFragment2
+import com.boykinchoi.baselibrary.base.vm.MyViewModelProvider
 import com.boykinchoi.baselibrary.widget.decoration.ColorItemDecoration
 import com.boykinchoi.star.coroutine.CoroutineTest
 import com.boykinchoi.star.databinding.FragmentHomeBinding
@@ -16,7 +17,7 @@ import java.util.*
  * Created by BoykinChoi
  * on 2021/2/2
  **/
-class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
+class HomeFragment : BaseFragment2() {
 
     companion object {
         @JvmStatic
@@ -27,11 +28,13 @@ class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
         }
     }
 
+    private val viewModel by lazy { MyViewModelProvider.create<HomeJuHeViewModel>(this) }
+
     private lateinit var viewBinding: FragmentHomeBinding
 
     private val historyToadyAdapter: HistoryTodayAdapter? by lazy { HistoryTodayAdapter() }
 
-    override val stateRootView: View?
+    override val stateRootView: View
         get() = viewBinding.llRoot
 
     override fun viewBind(
@@ -76,7 +79,7 @@ class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
         viewBinding.tvToday.text = today
         val date = "${month}/${day}"
 //        val date = "3/32"
-        viewModel?.getHistoryToadyData(date)
+        viewModel.getHistoryToadyData(date)
     }
 
     override fun observeData() {
@@ -95,7 +98,7 @@ class HomeFragment : BaseStatusFragment<HomeJuHeViewModel>() {
     }
 
     private fun observeJuHeData() {
-        viewModel?.historyTodayData?.observe(this, Observer {
+        viewModel.historyTodayData.observe(this, Observer {
             historyToadyAdapter?.setNewInstance(it)
         })
 

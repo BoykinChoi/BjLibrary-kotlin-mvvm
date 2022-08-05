@@ -1,9 +1,8 @@
 package com.boykinchoi.star.ui.home
 
-import android.view.View
-import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
-import com.boykinchoi.baselibrary.base.BaseStatusActivity
+import com.boykinchoi.baselibrary.base.BaseActivity2
+import com.boykinchoi.baselibrary.base.vm.MyViewModelProvider
 import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.baselibrary.widget.decoration.GridItemDecoration
 import com.boykinchoi.star.databinding.ActivityHomeBinding
@@ -13,13 +12,15 @@ import com.mirkowu.basetoolbar.ScreenUtil
  * Created by BoykinChoi
  * on 2021/1/30
  **/
-class HomeActivity : BaseStatusActivity<HomeViewModel>() {
+class HomeActivity : BaseActivity2() {
     private val bookAdapter: BookAdapter? by lazy { BookAdapter() }
 
     private lateinit var viewBinding: ActivityHomeBinding
 
-    override val stateRootView: View
-        get() = viewBinding.llRoot
+    private val viewModel by lazy { MyViewModelProvider.create<HomeViewModel>(this) }
+
+//    override val stateRootView: View
+//        get() = viewBinding.llRoot
 
     override fun bindView(): ViewBinding {
         viewBinding = ActivityHomeBinding.inflate(layoutInflater)
@@ -41,14 +42,14 @@ class HomeActivity : BaseStatusActivity<HomeViewModel>() {
                 )
             )
             tvName.setOnClickListener {
-                viewModel?.checkVersion()
+                viewModel.checkVersion()
             }
         }
 
     }
 
     override fun initData() {
-        viewModel?.getBaseData()
+        viewModel.getBaseData()
     }
 
     override fun observeData() {
@@ -57,14 +58,14 @@ class HomeActivity : BaseStatusActivity<HomeViewModel>() {
     }
 
     private fun observeHomeData() {
-        viewModel?.homeData?.observe(this, Observer {
+        viewModel.homeData.observe(this, {
             viewBinding.tvName.text = it.userInfo?.studentName
             bookAdapter?.setNewInstance(it.bookList)
         })
     }
 
     private fun observeVersionData() {
-        viewModel?.versionData?.observe(this, Observer {
+        viewModel.versionData.observe(this, {
             ToastUtil.s("发现版本${it.versionName}")
         })
     }
