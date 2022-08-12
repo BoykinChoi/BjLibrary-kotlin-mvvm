@@ -28,10 +28,17 @@ abstract class BaseTvActivity<M : BaseViewModel> : BaseActivity<M>() {
                 borderView = WeakReference(View(context))
                 return FocusBorder.Builder()
                     .setBorder(borderView)
+                    .setTagIgnore("focus_ignore")
+                    .setTagOnlyScale("focus_scale")
+                    .setTagOnlyVisible("focus_no_scale")
                     .setPadding(20)
                     .build()
             }
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        FocusHandler.unbind(this)
+    }
 }

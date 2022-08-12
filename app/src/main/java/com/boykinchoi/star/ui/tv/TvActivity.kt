@@ -5,8 +5,9 @@ import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseTvActivity
 import com.boykinchoi.star.databinding.ActivityTvBinding
 import com.boykinchoi.star.ui.home.HomeJuHeViewModel
+import me.jessyan.autosize.internal.CancelAdapt
 
-class TvActivity : BaseTvActivity<HomeJuHeViewModel>() {
+class TvActivity : BaseTvActivity<HomeJuHeViewModel>(),CancelAdapt {
 
     private lateinit var viewBinding: ActivityTvBinding
 

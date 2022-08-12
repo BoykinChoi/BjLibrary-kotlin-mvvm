@@ -24,4 +24,5 @@ import java.lang.annotation.Target;
 @Target(value = ElementType.METHOD)
 public @interface BeforeClick {
     String name() default "";
+    String job() default "";
 }

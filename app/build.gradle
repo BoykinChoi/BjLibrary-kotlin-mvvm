@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions' //最新官方已Deprecated，推荐迁移至ViewBinding 需要android studio 3.6
+apply plugin: 'kotlin-kapt'
 
 def config = rootProject.ext.ver
 def library = rootProject.ext.library
@@ -136,22 +137,13 @@ android {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-
     // 代码报Android kotlin AppCompatActivity错误::Cannot access 'androidx.activity.contextaware.ContextAware'
     // which is a supertype of xxx;Cannot access 'androidx.activity.result.ActivityResultCaller'时
     // 引入此库
     implementation "androidx.activity:activity-ktx:1.2.0-beta01"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation project(':baselibrary')
     debugImplementation project(':baselibrary')
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //stateView
     implementation 'com.github.nukc.stateview:library:1.5.4'
@@ -160,4 +152,14 @@ dependencies {
     implementation project(':lib_annotation')
     // 注意processor要用annotationProcessor
     annotationProcessor project(':lib_processor')
+
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    //PS:kapt 可以替代annotationProcessor 注释java类
+    //如果在build中使用kapt和annotationProcessor混合引用,可能会导致编译失败,需要全部替换为kapt
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 }

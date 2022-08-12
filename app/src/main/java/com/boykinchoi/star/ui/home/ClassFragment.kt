@@ -8,9 +8,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseFragment
-import com.boykinchoi.star.annotation.AnnotationTest
+import com.boykinchoi.star.annotation.AnnotationTest2
 import com.boykinchoi.star.databinding.FragmentClassBinding
-import com.boykinchoi.star.generic.Animal
 import com.boykinchoi.star.generic.Cat
 import com.boykinchoi.star.generic.GenericTest
 import com.boykinchoi.star.generic.Herd
@@ -60,9 +59,9 @@ class ClassFragment : BaseFragment<HomeJuHeViewModel>() {
             feedCat(herd)
         }
 
-        AnnotationTest().apply {
-            ganAnnotation()
-        }
+      AnnotationTest2()
+
+
     }
 
     override fun initData() {

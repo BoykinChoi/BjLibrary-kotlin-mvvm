@@ -1,6 +1,8 @@
 package com.boykinchoi.baselibrary.base.vm
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.boykinchoi.baselibrary.base.*
 import com.boykinchoi.baselibrary.util.ToastUtil
 
@@ -18,6 +20,7 @@ object MyViewModelProvider {
     inline fun <reified V : BaseViewModel> create(owenr: BaseActivity2): V {
         return ViewModelProvider(owenr, ViewModelProvider.NewInstanceFactory()).get(V::class.java)
             .apply {
+                application = owenr.application
                 showLoading.observe(owenr) {
                     if (it) owenr.showLoadingDialog() else owenr.dismissLoadingDialog()
                 }
@@ -44,6 +47,7 @@ object MyViewModelProvider {
     inline fun <reified V : BaseViewModel> create(owenr: BaseFragment2): V {
         return ViewModelProvider(owenr, ViewModelProvider.NewInstanceFactory()).get(V::class.java)
             .apply {
+                application = owenr.requireActivity().application
                 showLoading.observe(owenr) {
                     if (it) owenr.showLoadingDialog() else owenr.dismissLoadingDialog()
                 }
@@ -61,6 +65,5 @@ object MyViewModelProvider {
                     }
                 }
             }
-
     }
 }

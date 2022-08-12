@@ -4,6 +4,8 @@ import com.boykinchoi.baselibrary.network.bean.BaseBean
 import com.boykinchoi.baselibrary.network.bean.JuHeBaseBean
 import com.boykinchoi.star.api.ApiConstants
 import com.boykinchoi.star.bean.*
+import com.boykinchoi.star.room.entity.DbBook
+import com.boykinchoi.star.room.entity.DbUser
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -19,6 +21,13 @@ interface TestService {
 
     @GET(ApiConstants.HOME_BOOK_LIST)
     suspend fun homeBookList(): BaseBean<MutableList<BookBean>>
+
+
+    @GET(ApiConstants.HOME_USER_INFO)
+    suspend fun homeUserInfo2(): BaseBean<DbUser>
+
+    @GET(ApiConstants.HOME_BOOK_LIST)
+    suspend fun homeBookList2(): BaseBean<MutableList<DbBook>>
 
     /**
      * 登录

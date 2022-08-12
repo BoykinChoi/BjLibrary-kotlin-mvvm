@@ -1,3 +1,4 @@
+include ':mod_room'
 include ':lib_processor'
 include ':lib_annotation'
 include ':app', ':baselibrary'

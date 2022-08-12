@@ -1,23 +1,25 @@
-package com.boykinchoi.star.ui.home
+package com.boykinchoi.star.ui.book
 
 import androidx.viewbinding.ViewBinding
 import com.boykinchoi.baselibrary.base.BaseActivity2
 import com.boykinchoi.baselibrary.base.vm.MyViewModelProvider
 import com.boykinchoi.baselibrary.util.ToastUtil
 import com.boykinchoi.baselibrary.widget.decoration.GridItemDecoration
+import com.boykinchoi.star.bean.BookBean
 import com.boykinchoi.star.databinding.ActivityHomeBinding
+import com.boykinchoi.star.ui.home.HomeViewModel
 import com.mirkowu.basetoolbar.ScreenUtil
 
 /**
  * Created by BoykinChoi
  * on 2021/1/30
  **/
-class HomeActivity : BaseActivity2() {
-    private val bookAdapter: BookAdapter? by lazy { BookAdapter() }
+class BookHomeActivity : BaseActivity2() {
+    private val bookAdapter: BookAdapter2? by lazy { BookAdapter2() }
 
     private lateinit var viewBinding: ActivityHomeBinding
 
-    private val viewModel by lazy { MyViewModelProvider.create<HomeViewModel>(this) }
+    private val viewModel by lazy { MyViewModelProvider.create<BookViewModel>(this) }
 
 //    override val stateRootView: View
 //        get() = viewBinding.llRoot
@@ -37,7 +39,7 @@ class HomeActivity : BaseActivity2() {
             rvBook.addItemDecoration(
                 GridItemDecoration(
                     3, ScreenUtil.dip2px(
-                        this@HomeActivity, 15f
+                        this@BookHomeActivity, 15f
                     ), false
                 )
             )
@@ -59,8 +61,9 @@ class HomeActivity : BaseActivity2() {
 
     private fun observeHomeData() {
         viewModel.homeData.observe(this, {
-            viewBinding.tvName.text = it.userInfo?.studentName
+            viewBinding.tvName.text = it.user?.studentName
             bookAdapter?.setNewInstance(it.bookList)
+            viewBinding.rvBook.scrollToPosition(0)
         })
     }
 

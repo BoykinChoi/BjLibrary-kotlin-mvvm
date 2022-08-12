@@ -55,6 +55,7 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     api "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0-alpha07"
+    api 'com.google.android.material:material:1.3.0'
 
     api library.androidX_appcompat
     api library.recyclerview_x
@@ -70,7 +71,7 @@ dependencies {
     api library.retrofit2_adapter
 
     //屏幕适配
-//    api library.autosize
+    api library.autosize
 
     //常用工具库
     api library.circleimageview

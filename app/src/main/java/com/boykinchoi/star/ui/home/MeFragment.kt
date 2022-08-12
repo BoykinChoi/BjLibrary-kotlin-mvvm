@@ -11,9 +11,9 @@ import com.boykinchoi.star.coroutine.CoroutineTest
 import com.boykinchoi.star.databinding.FragmentMeBinding
 import com.boykinchoi.star.flow.FlowTest
 import com.boykinchoi.star.lifecycle.LifecycleActivity
+import com.boykinchoi.star.ui.book.BookHomeActivity
 import com.boykinchoi.star.ui.tv.TvActivity
 import kotlinx.android.synthetic.main.fragment_me.*
-import java.util.logging.Logger
 
 /**
  * Created by BoykinChoi
@@ -38,7 +38,7 @@ class MeFragment : BaseFragment<HomeJuHeViewModel>() {
 
     override fun initialize() {
         tv_home.setOnClickListener {
-            activity?.start<HomeActivity>()
+            activity?.start<BookHomeActivity>()
         }
         tv_tv.setOnClickListener {
             activity?.start<TvActivity>()

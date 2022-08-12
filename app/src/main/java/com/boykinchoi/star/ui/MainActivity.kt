@@ -8,8 +8,8 @@ import com.boykinchoi.baselibrary.base.BaseActivity
 import com.boykinchoi.baselibrary.base.FragmentBasePagerAdapter
 import com.boykinchoi.baselibrary.util.OnlyValueUtil
 import com.boykinchoi.star.R
-import com.boykinchoi.star.bean.BigBossImpl
-import com.boykinchoi.star.bean.BigStaffImpl
+//import com.boykinchoi.star.bean.BigBossImpl
+//import com.boykinchoi.star.bean.BigStaffImpl
 import com.boykinchoi.star.bean.BossImpl
 import com.boykinchoi.star.bean.StaffImpl
 import com.boykinchoi.star.databinding.ActivityMainBinding
@@ -62,18 +62,18 @@ class MainActivity : BaseActivity<HomeJuHeViewModel>(), RadioGroup.OnCheckedChan
 
         staffB.askHelp(bossA)
 
-        val staffD = BigStaffImpl("员工D")
-        val bossC = BigBossImpl(staffD)
+//        val staffD = BigStaffImpl("员工D")
+//        val bossC = BigBossImpl(staffD)
+//
+//        val staffE = BigStaffImpl("员工E")
+//        val boosD = BigBossImpl(staffE)
 
-        val staffE = BigStaffImpl("员工E")
-        val boosD = BigBossImpl(staffE)
-
-        boosD.askHelp(bossC)
-
-        bossC.askHelp(boosD)
-
-        staffD.askHelp(boosD)
-        staffE.askHelp(bossC)
+//        boosD.askHelp(bossC)
+//
+//        bossC.askHelp(boosD)
+//
+//        staffD.askHelp(boosD)
+//        staffE.askHelp(bossC)
 
         val mac1 = OnlyValueUtil.DeviceUtils.getMacAddressByInetAddress()
         val mac2 = OnlyValueUtil.DeviceUtils.getMacAddressByNetworkInterface()

@@ -1,5 +1,6 @@
 package com.boykinchoi.baselibrary.base.vm
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.boykinchoi.baselibrary.base.LoadState
@@ -13,10 +14,14 @@ import com.boykinchoi.baselibrary.base.LoadState
  * on 2021/1/30
  **/
 abstract class BaseViewModel : ViewModel() {
-    //页面状态
+
+    // 全局Application，提供获取资源的能力（不使用官方提供的AndroidViewModel是因为扩展能力差）
+    var application: Application? = null
+
+    // 页面状态
     val loadState by lazy { MutableLiveData<LoadState>() }
 
-    //加载框状态
+    // 加载框状态
     val showLoading by lazy { MutableLiveData<Boolean>() }
 
     open fun getBaseData() {

@@ -1,4 +1,4 @@
-package com.boykinchoi.star.ui.home
+package com.boykinchoi.star.ui.book
 
 import android.widget.ImageView
 import com.boykinchoi.star.R
